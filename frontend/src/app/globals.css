@@ -4,7 +4,7 @@
   --font-title: var(--font-poppins);
   --font-subtitle: var(--font-merriweather);
   --font-body: var(--font-roboto);
-  --font-button: var(--font-merriweather);
+  --font-button: var(--font-roboto);
   --default-transition-duration: 300ms;
   --color-esona: #f15757;
 }

@@ -39,7 +39,7 @@ export default function BaseText({
   const baseClasses = (() => {
     switch (variant) {
       case 'h1':
-        return 'font-title text-2xl font-bold md:text-3xl';
+        return 'font-title text-4xl font-bold md:text-5xl';
       case 'h2':
         return 'font-subtitle text-xl font-bold md:text-2xl';
       case 'h3':
