@@ -1,3 +1,4 @@
+import BaseButton from '@/components/BaseButton';
 import BaseText from '@/components/BaseText';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/icons/Hero';
@@ -32,14 +33,9 @@ export default async function Home() {
             Discover a wide range of products at unbeatable prices. From electronics to fashion, we
             have it all. Shop now and experience the convenience of one-stop shopping!
           </BaseText>
-          <Link
-            href="/products"
-            className="bg-esona hover:bg-esona/90 mt-6 w-max rounded-full px-6 py-3 transition-colors"
-          >
-            <BaseText variant="button-bold" className="text-white">
-              Explore More
-            </BaseText>
-          </Link>
+          <BaseButton variant="primary" href="/products" className="mt-6">
+            Explore More
+          </BaseButton>
         </div>
         <div className="mt-4 flex w-full gap-4 overflow-auto">
           {categories.map((category) => (
