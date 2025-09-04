@@ -10,7 +10,7 @@ type Product = {
 };
 
 async function getProducts(): Promise<Product[]> {
-  const res = await fetch('https://dummyjson.com/products?limit=0', { cache: 'no-store' });
+  const res = await fetch('https://dummyjson.com/products?limit=0');
   const data = await res.json();
   return data.products;
 }

@@ -1,10 +1,14 @@
 import { Handbag, UserRound } from 'lucide-react';
+import Link from 'next/link';
+import Logo from '@/components/icons/Logo';
 
 export default function Navbar() {
   return (
-    <nav className="w-full border-b border-neutral-200 bg-white">
+    <nav className="w-full bg-white">
       <div className="container flex items-center justify-between py-3">
-        <img src="/logo.svg" className="h-8 md:h-12" />
+        <Link href="/">
+          <Logo className="h-8 md:h-12" />
+        </Link>
         <div className="flex">
           <div className="flex size-12 cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-neutral-100">
             <Handbag size={24} />
