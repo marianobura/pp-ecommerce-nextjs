@@ -9,6 +9,16 @@
   --color-esona: #f15757;
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }

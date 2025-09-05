@@ -37,7 +37,7 @@ export default async function Home() {
             Explore More
           </BaseButton>
         </div>
-        <div className="mt-4 flex w-full gap-4 overflow-auto">
+        <div className="no-scrollbar mt-4 flex w-full gap-4 overflow-auto">
           {categories.map((category) => (
             <Link
               href=""
