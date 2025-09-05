@@ -10,10 +10,10 @@ export default function Navbar() {
           <Logo className="h-8 md:h-12" />
         </Link>
         <div className="flex">
-          <div className="flex size-12 cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-neutral-100">
+          <div className="flex size-12 cursor-pointer items-center justify-center rounded-4xl transition-colors hover:bg-neutral-100">
             <Handbag size={24} />
           </div>
-          <div className="flex size-12 cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-neutral-100">
+          <div className="flex size-12 cursor-pointer items-center justify-center rounded-4xl transition-colors hover:bg-neutral-100">
             <UserRound size={24} />
           </div>
         </div>
