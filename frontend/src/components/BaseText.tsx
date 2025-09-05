@@ -49,9 +49,9 @@ export default function BaseText({
       case 'text':
         return 'font-body text-sm font-normal md:text-base';
       case 'button-bold':
-        return 'font-button text-sm font-semibold';
+        return 'font-button text-sm font-semibold md:text-base';
       case 'button':
-        return 'font-button text-sm font-medium';
+        return 'font-button text-sm font-medium md:text-base';
       default:
         return 'font-body text-sm font-normal md:text-base';
     }
