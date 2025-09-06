@@ -1,10 +1,15 @@
+'use client';
+
 import { Handbag, UserRound } from 'lucide-react';
 import Link from 'next/link';
 import Logo from '@/components/icons/Logo';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
+  const pathname = usePathname();
+
   return (
-    <nav className="w-full bg-white">
+    <nav className={`w-full bg-white ${pathname !== '/' ? 'border-b border-neutral-200' : ''}`}>
       <div className="container flex items-center justify-between py-3">
         <Link href="/">
           <Logo className="h-8 md:h-12" />
