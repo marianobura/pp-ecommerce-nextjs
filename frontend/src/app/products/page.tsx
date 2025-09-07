@@ -1,47 +1,32 @@
 import BaseText from '@/components/BaseText';
-import Link from 'next/link';
-
-type Product = {
-  id: number;
-  title: string;
-  thumbnail: string;
-  price: number;
-};
-
-async function getProducts(): Promise<Product[]> {
-  const res = await fetch('https://dummyjson.com/products?limit=0', { cache: 'no-cache' });
-  const data = await res.json();
-  return data.products;
-}
+import { getProducts } from '@/services/products';
+import ProductCard from '@/components/products/ProductCard';
 
 export default async function ProductsPage() {
   const products = await getProducts();
 
   return (
-    <div className="container py-3">
-      <div className="w-full text-center">
-        <BaseText variant="h2">Products Page</BaseText>
-      </div>
-      <div className="mt-2 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
-          <Link
-            href={`/products/${product.id}`}
-            key={product.id}
-            className="border-esona/20 flex flex-col border"
-          >
-            <img
-              src={product.thumbnail}
-              alt={`Imagen de ${product.title}`}
-              className="bg-esona/20 w-full object-none"
-            />
-            <div className="mt-2 flex grow flex-col justify-between gap-4 p-3 text-center">
-              <BaseText variant="h3" className="line-clamp-1 truncate">
-                {product.title}
-              </BaseText>
-              <BaseText variant="text">${product.price}</BaseText>
+    <div className="container pt-16 pb-4">
+      <div className="flex">
+        <div className="border-r border-neutral-200 pr-8">
+          <div className="sticky top-8 h-[600px] w-64 bg-neutral-100"></div>
+        </div>
+        <div className="ml-8 flex flex-1 flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <BaseText variant="h2">{`Product List (${products.length})`}</BaseText>
+            <div className="flex gap-2">
+              <div className="h-12 w-32 rounded-4xl bg-neutral-100"></div>
+              <div className="h-12 w-32 rounded-4xl bg-neutral-100"></div>
+              <div className="h-12 w-32 rounded-4xl bg-neutral-100"></div>
+              <div className="h-12 w-32 rounded-4xl bg-neutral-100"></div>
             </div>
-          </Link>
-        ))}
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
