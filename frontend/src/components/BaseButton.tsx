@@ -18,11 +18,11 @@ export default function BaseButton({
   ...props
 }: BaseButtonProps) {
   const baseStyles =
-    'w-max rounded-full px-6 py-3 transition-colors text-center inline-flex items-center justify-center cursor-pointer';
+    'rounded-full px-6 py-3 transition-colors text-center inline-flex items-center justify-center cursor-pointer';
 
   const variantStyles: Record<string, string> = {
     primary: 'bg-esona hover:bg-esona/90 text-white',
-    secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-900',
+    secondary: 'bg-neutral-200 hover:bg-neutral-300',
     outline: 'border-2 border-esona text-esona hover:bg-esona/10',
   };
 
@@ -38,7 +38,7 @@ export default function BaseButton({
 
   return (
     <button className={classes} {...props}>
-      <BaseText variant="button-bold">{children}</BaseText>
+      <BaseText variant="button">{children}</BaseText>
     </button>
   );
 }
