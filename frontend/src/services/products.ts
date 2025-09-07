@@ -1,22 +1,25 @@
-import { Product } from "@/types/Product";
+import { Product } from '@/types/product';
 
-const BASE_URL = "https://dummyjson.com";
+const BASE_URL = 'https://dummyjson.com';
 
 export async function getProducts(limit = 0): Promise<Product[]> {
-  const res = await fetch(`${BASE_URL}/products?limit=${limit}`, {
-    cache: "no-store",
-  })
+  try {
+    const res = await fetch(`${BASE_URL}/products?limit=${limit}`, {
+      cache: 'no-store',
+    });
 
-  if (!res.ok) throw new Error("Failed to fetch products");
-
-  const data = await res.json();
-  return data.products;
+    const data = await res.json();
+    return data.products;
+  } catch (error) {
+    return [];
+  }
 }
 
-export async function getProduct(id: string): Promise<Product> {
-  const res = await fetch(`${BASE_URL}/products/${id}`);
-
-  if (!res.ok) throw new Error("Failed to fetch products");
-
-  return res.json()
+export async function getProduct(id: string): Promise<Product | null> {
+  try {
+    const res = await fetch(`${BASE_URL}/products/${id}`);
+    return res.json();
+  } catch (error) {
+    return null;
+  }
 }
