@@ -33,7 +33,7 @@ export default async function Home() {
             Discover a wide range of products at unbeatable prices. From electronics to fashion, we
             have it all. Shop now and experience the convenience of one-stop shopping!
           </BaseText>
-          <BaseButton variant="primary" href="/products" className="mt-6">
+          <BaseButton variant="primary" href="/products" className="mt-6 w-fit">
             Explore More
           </BaseButton>
         </div>
