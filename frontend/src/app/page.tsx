@@ -4,18 +4,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/icons/Hero';
 import { MoveRight } from 'lucide-react';
 import Link from 'next/link';
-
-type Category = string[];
-
-async function getCategories(): Promise<Category> {
-  const res = await fetch('https://dummyjson.com/products/category-list');
-  const data = await res.json();
-  return data;
-}
-
-function formatCategoryName(category: string): string {
-  return category.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
-}
+import { getCategories } from '@/services/products';
 
 export default async function Home() {
   const categories = await getCategories();
@@ -40,14 +29,14 @@ export default async function Home() {
         <div className="no-scrollbar mt-4 flex w-full gap-4 overflow-auto">
           {categories.map((category) => (
             <Link
-              href=""
-              key={category}
+              href={`/category/${category.slug}`}
+              key={category.slug}
               className="flex min-w-96 flex-col gap-4 rounded-4xl bg-neutral-100 p-3"
             >
               <div className="h-32 w-full rounded-3xl bg-neutral-200"></div>
               <div className="flex justify-between gap-8 p-3">
                 <BaseText variant="h2" className="truncate whitespace-nowrap">
-                  {formatCategoryName(category)}
+                  {category.name}
                 </BaseText>
                 <MoveRight size={24} />
               </div>
