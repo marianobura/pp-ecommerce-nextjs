@@ -1,19 +1,13 @@
 import BaseText from '@/components/BaseText';
 import { Star } from 'lucide-react';
-import { getProducts, getProduct } from '@/services/products';
+import { getProduct } from '@/services/products';
 import { ProductButton } from '@/components/products/ProductButton';
-
-export async function generateStaticParams() {
-  const products = await getProducts();
-
-  return products.map((product) => ({
-    id: product.id.toString(),
-  }));
-}
+import { getDiscountedPrice, hasValidDiscount } from '@/utils/discount';
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const product = await getProduct(id);
+  const discountedPrice = product ? getDiscountedPrice(product) : null;
 
   return (
     <>
@@ -93,9 +87,20 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <BaseText variant="h3" className="text-esona">
-                ${product?.price}
-              </BaseText>
+              {product && hasValidDiscount(product) ? (
+                <div className="flex flex-col items-end">
+                  <BaseText variant="h3" className="text-esona">
+                    ${discountedPrice}
+                  </BaseText>
+                  <BaseText variant="text" className="text-neutral-500 line-through">
+                    ${product?.price}
+                  </BaseText>
+                </div>
+              ) : (
+                <BaseText variant="h3" className="text-esona">
+                  ${product?.price}
+                </BaseText>
+              )}
               {product && <ProductButton product={product} />}
             </div>
           </div>
