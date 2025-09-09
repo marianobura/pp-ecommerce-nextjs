@@ -22,7 +22,7 @@ export default function ProductCard({ product }: { product: Product }) {
       >
         {product?.discountPercentage > 12 && (
           <div className="bg-esona absolute top-3 left-3 flex size-12 items-center justify-center rounded-4xl text-white">
-            <BaseText variant="button-bold">{product?.discountPercentage.toFixed()}%</BaseText>
+            <BaseText variant="text-semibold">{product?.discountPercentage.toFixed()}%</BaseText>
           </div>
         )}
         <img
