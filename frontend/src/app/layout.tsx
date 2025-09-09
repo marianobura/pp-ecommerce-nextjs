@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Poppins, Merriweather, Roboto } from 'next/font/google';
-import './globals.css';
+import '@/styles/globals.css';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.variable} ${merriweather.variable} ${roboto.variable} min-h-dvh`}
+        className={`${poppins.variable} ${merriweather.variable} ${roboto.variable} min-h-screen min-w-screen`}
         cz-shortcut-listen="true"
       >
         {children}
