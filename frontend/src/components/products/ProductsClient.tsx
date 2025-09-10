@@ -15,7 +15,11 @@ export default function ProductsClient({
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleCategory = (categorySlug: string) => {
-    setSelectedCategory(categorySlug);
+    if (selectedCategory === categorySlug) {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(categorySlug);
+    }
   };
 
   const resetCategory = () => {
