@@ -19,8 +19,8 @@ export default function ProductFilter({
         <div className="mr-8 flex items-center gap-2">
           <BaseText variant="h2">Filter</BaseText>
         </div>
-        <div className="flex flex-col">
-          <div className="flex flex-col gap-1 border-b border-neutral-200">
+        <div className="flex border-spacing-y-2 flex-col divide-y divide-neutral-200">
+          <div className="flex flex-col gap-1 pb-6">
             <div className="mr-8 flex items-center justify-between">
               <BaseText variant="text-semibold">Category</BaseText>
               {selectedCategory && (
@@ -31,7 +31,7 @@ export default function ProductFilter({
                 />
               )}
             </div>
-            <div className="mr-8 mb-8 flex max-h-44 flex-col gap-1 overflow-y-scroll">
+            <div className="mr-8 flex max-h-44 flex-col gap-1 overflow-y-scroll">
               {categories.map((category) => (
                 <div
                   key={category.slug}
@@ -58,7 +58,7 @@ export default function ProductFilter({
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-1 border-b border-neutral-200">
+          <div className="flex flex-col gap-1 pt-6">
             <div className="mr-8 flex items-center justify-between">
               <BaseText variant="text-semibold">Price</BaseText>
               {selectedCategory && (
@@ -69,7 +69,7 @@ export default function ProductFilter({
                 />
               )}
             </div>
-            <div className="mr-8 mb-8 flex max-h-44 flex-col gap-1 overflow-y-scroll">
+            <div className="mr-8 flex max-h-44 flex-col gap-1 overflow-y-scroll">
               {categories.map((category) => (
                 <div
                   key={category.slug}
