@@ -16,7 +16,7 @@ export default function ProductFilter({
   return (
     <div className="sticky top-8 w-64">
       <div className="flex flex-col gap-4">
-        <div className="mr-8 flex h-12 items-center gap-2">
+        <div className="mr-8 flex items-center gap-2">
           <BaseText variant="h2">Filter</BaseText>
         </div>
         <div className="flex flex-col">
