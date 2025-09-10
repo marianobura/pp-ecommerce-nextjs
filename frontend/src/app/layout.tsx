@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.variable} ${merriweather.variable} ${roboto.variable} min-h-screen min-w-screen`}
+        className={`${poppins.variable} ${merriweather.variable} ${roboto.variable} min-h-screen`}
         cz-shortcut-listen="true"
       >
         {children}
