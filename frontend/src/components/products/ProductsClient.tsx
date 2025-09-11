@@ -3,7 +3,8 @@
 import BaseText from '@/components/BaseText';
 import ProductCard from '@/components/products/ProductCard';
 import ProductFilter from '@/components/products/ProductFilter';
-import { useState } from 'react';
+import { hasValidDiscount } from '@/utils/discount';
+import { useMemo, useState } from 'react';
 
 export default function ProductsClient({
   products,
@@ -13,22 +14,33 @@ export default function ProductsClient({
   categories: any[];
 }) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedRating, setSelectedRating] = useState<number | null>(null);
+  const [selectedDiscount, setSelectedDiscount] = useState(false);
 
-  const handleCategory = (categorySlug: string) => {
-    if (selectedCategory === categorySlug) {
-      setSelectedCategory(null);
-    } else {
-      setSelectedCategory(categorySlug);
-    }
-  };
+  const availableRatings = useMemo(() => {
+    const unique = new Set(products.map((p) => Math.round(p.rating)));
+    return Array.from(unique).sort((a, b) => a - b);
+  }, [products]);
 
-  const resetCategory = () => {
-    setSelectedCategory(null);
-  };
+  const { minPrice, maxPrice } = useMemo(() => {
+    const prices = products.map((p) => p.price);
+    return {
+      minPrice: Math.floor(Math.min(...prices)),
+      maxPrice: Math.ceil(Math.max(...prices)),
+    };
+  }, [products]);
+  const [selectedPrice, setSelectedPrice] = useState<[number, number]>([minPrice, maxPrice]);
 
-  const filteredProducts = selectedCategory
-    ? products.filter((product) => product.category === selectedCategory)
-    : products;
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) => {
+      if (selectedCategory && product.category !== selectedCategory) return false;
+      if (product.price < selectedPrice[0] || product.price > selectedPrice[1]) return false;
+      if (selectedRating && Math.round(product.rating) !== selectedRating) return false;
+      if (selectedDiscount && !hasValidDiscount(product)) return false;
+
+      return true;
+    });
+  }, [products, selectedCategory, selectedPrice, selectedRating, selectedDiscount]);
 
   return (
     <div className="container pt-16 pb-4">
@@ -36,9 +48,21 @@ export default function ProductsClient({
         <div className="border-r border-neutral-200">
           <ProductFilter
             categories={categories}
-            onSelectCategory={handleCategory}
-            resetCategory={resetCategory}
             selectedCategory={selectedCategory}
+            onSelectCategory={(slug) =>
+              setSelectedCategory(selectedCategory === slug ? null : slug)
+            }
+            selectedPrice={selectedPrice}
+            onChangePrice={setSelectedPrice}
+            selectedRating={selectedRating}
+            onSelectRating={(rating) =>
+              setSelectedRating(selectedRating === rating ? null : rating)
+            }
+            selectedDiscount={selectedDiscount}
+            onToggleDiscount={() => setSelectedDiscount((prev) => !prev)}
+            availableRatings={availableRatings}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
           />
         </div>
         <div className="ml-8 flex flex-1 flex-col gap-4">
