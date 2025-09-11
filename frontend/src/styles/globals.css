@@ -26,3 +26,34 @@ body {
 .container {
   @apply mx-auto w-full max-w-[1320px] px-3;
 }
+
+.range-thumb::-webkit-slider-thumb {
+  appearance: none;
+  pointer-events: all;
+  height: 1rem;
+  width: 1rem;
+  background-color: var(--color-esona);
+  border-radius: 9999px;
+  cursor: pointer;
+  margin-top: -0.45rem;
+}
+
+.range-thumb::-moz-range-thumb {
+  appearance: none;
+  pointer-events: all;
+  height: 1rem;
+  width: 1rem;
+  background-color: var(--color-esona);
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.range-thumb::-webkit-slider-runnable-track {
+  height: 1px;
+  background: transparent;
+}
+
+.range-thumb::-moz-range-track {
+  height: 1px;
+  background: transparent;
+}
