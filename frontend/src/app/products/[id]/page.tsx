@@ -80,7 +80,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           <div className="flex grow items-center justify-between gap-8 pl-10">
             <div className="flex flex-col">
               <BaseText variant="h3">{product?.title}</BaseText>
-              <div className="flex gap-2 text-neutral-500">
+              <div className="flex gap-2">
                 <BaseText variant="text">{product?.shippingInformation}</BaseText>•
                 <BaseText variant="text">{product?.warrantyInformation}</BaseText>•
                 <BaseText variant="text">{product?.returnPolicy}</BaseText>
@@ -92,7 +92,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                   <BaseText variant="h3" className="text-esona">
                     ${discountedPrice}
                   </BaseText>
-                  <BaseText variant="text" className="text-neutral-500 line-through">
+                  <BaseText variant="text" className="line-through">
                     ${product?.price}
                   </BaseText>
                 </div>

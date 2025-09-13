@@ -187,7 +187,7 @@ export default function ProductFilter({
                 className={`group/item flex cursor-pointer items-start gap-2 transition-colors ${
                   selectedDiscount
                     ? 'text-esona font-semibold'
-                    : 'hover:text-esona text-neutral-700'
+                    : 'hover:text-esona text-neutral-600'
                 }`}
               >
                 <div

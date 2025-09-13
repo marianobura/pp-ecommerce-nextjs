@@ -49,13 +49,13 @@ export default function BaseText({
       case 'text-semibold':
         return 'font-body text-sm font-semibold md:text-base';
       case 'text':
-        return 'font-body text-sm font-normal md:text-base';
+        return 'font-body text-sm font-normal md:text-base text-neutral-700';
       case 'button-bold':
         return 'font-button text-sm font-semibold md:text-base';
       case 'button':
         return 'font-button text-sm font-medium md:text-base';
       case 'small':
-        return 'font-body text-xs md:text-sm';
+        return 'font-body text-xs md:text-sm text-neutral-700';
       default:
         return 'font-body text-sm font-normal md:text-base';
     }
