@@ -1,35 +1,65 @@
-import { Eye } from 'lucide-react';
+'use client';
+
+import { Eye, EyeOff } from 'lucide-react';
 import BaseText from './BaseText';
+import { useState } from 'react';
 
 export default function BaseInput({
   label,
+  id,
   type = 'text',
   placeholder,
   className = '',
   password,
+  ...rest
 }: {
   label?: string;
+  id?: string;
   type?: string;
   placeholder?: string;
   className?: string;
   password?: boolean;
+  [key: string]: any;
 }) {
+  const [inputType, setInputType] = useState(type);
+
+  const handleTogglePassword = () => {
+    setInputType((prev) => (prev === 'password' ? 'text' : 'password'));
+  };
+
   return (
     <div className={`flex flex-col gap-0.5 ${className}`}>
-      <label className="block">
-        <BaseText variant="text-semibold">{label}</BaseText>
-      </label>
-      <div className={`${password ? 'relative' : 'block'}`}>
+      {label && (
+        <label htmlFor={id}>
+          <BaseText variant="text-semibold">{label}</BaseText>
+        </label>
+      )}
+      <div
+        className={`focus-within:border-esona focus-within:ring-esona h-12 overflow-hidden rounded-4xl border border-neutral-200 transition focus-within:ring-1 ${password ? 'flex' : ''}`}
+      >
         <input
-          type={type}
+          type={inputType}
           placeholder={placeholder}
-          className="focus:border-esona focus:ring-esona font-body w-full rounded-4xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 transition placeholder:text-neutral-400 focus:ring-1 focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-100 disabled:text-neutral-400"
+          className="font-body size-full bg-white px-4 py-3 text-sm text-neutral-900 outline-none placeholder:text-neutral-400"
+          id={id}
+          {...rest}
         />
         {password && (
-          <Eye
-            size={32}
-            className="hover:text-esona absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer rounded-full p-1 text-neutral-600 transition-colors"
-          />
+          <div className="flex aspect-square size-12 items-center justify-center">
+            {inputType === 'password' ? (
+              <Eye
+                size={24}
+                className="hover:text-esona cursor-pointer text-neutral-600 transition-colors select-none"
+                onClick={handleTogglePassword}
+              />
+            ) : (
+              <EyeOff
+                size={24}
+                className="hover:text-esona cursor-pointer text-neutral-600 transition-colors select-none"
+                onClick={handleTogglePassword}
+              />
+            )}
+          </div>
         )}
       </div>
     </div>
