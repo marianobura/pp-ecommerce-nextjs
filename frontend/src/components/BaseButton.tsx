@@ -18,7 +18,7 @@ export default function BaseButton({
   ...props
 }: BaseButtonProps) {
   const baseStyles =
-    'rounded-full px-6 py-3 transition-colors text-center inline-flex items-center justify-center cursor-pointer';
+    'rounded-4xl px-6 py-3 transition-colors text-center inline-flex items-center justify-center cursor-pointer';
 
   const variantStyles: Record<string, string> = {
     primary: 'bg-esona hover:bg-esona/90 text-white',
