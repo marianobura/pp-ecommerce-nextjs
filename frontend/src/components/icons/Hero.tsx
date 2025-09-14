@@ -45,7 +45,7 @@ export default function Hero({ className }: { className?: string }) {
         />
         <path
           d="M574.82,323.79l28.97-11.02,13.57,22.66c16.13,28.2,16.19,58.43,12.24,90.67l2.21,51.58h-82.74l25.74-153.89Z"
-          fill="#f15757"
+          fill="var(--color-esona)"
           strokeWidth="0"
         />
         <path
@@ -55,7 +55,7 @@ export default function Hero({ className }: { className?: string }) {
         />
         <path
           d="M493.92,479.9l54.83-55.62,32.75-62.81c6.36-12.22,21.43-16.96,33.64-10.6,12.22,6.36,16.96,21.43,10.6,33.64-.49.94-1.04,1.84-1.64,2.71l-47.1,67.73-.07.1-72.06,42.43-10.94-17.6h-.01,0Z"
-          fill="#f15757"
+          fill="var(--color-esona)"
           strokeWidth="0"
         />
       </g>
@@ -78,7 +78,7 @@ export default function Hero({ className }: { className?: string }) {
       <g>
         <path
           d="M102.04,114.06c0-8.97,0-13.46,1.93-16.8,1.26-2.19,3.08-4.01,5.27-5.27,3.34-1.93,7.83-1.93,16.8-1.93s13.46,0,16.8,1.93c2.19,1.26,4.01,3.08,5.27,5.27,1.93,3.34,1.93,7.83,1.93,16.8s0,13.46-1.93,16.8c-1.26,2.19-3.08,4.01-5.27,5.27-3.34,1.93-7.83,1.93-16.8,1.93s-13.46,0-16.8-1.93c-2.19-1.26-4.01-3.08-5.27-5.27-1.93-3.34-1.93-7.83-1.93-16.8Z"
-          fill="#f15757"
+          fill="var(--color-esona)"
           strokeWidth="0"
         />
         <path
@@ -95,7 +95,7 @@ export default function Hero({ className }: { className?: string }) {
       />
       <path
         d="M110,174.06h59c4.42,0,8,3.58,8,8v8c0,4.42-3.58,8-8,8h-59c-4.42,0-8-3.58-8-8v-8c0-4.42,3.58-8,8-8Z"
-        fill="#f15757"
+        fill="var(--color-esona)"
         strokeWidth="0"
       />
       <path
@@ -116,7 +116,7 @@ export default function Hero({ className }: { className?: string }) {
       <g>
         <path
           d="M110,246.06h24c4.42,0,8,3.58,8,8v24c0,4.42-3.58,8-8,8h-24c-4.42,0-8-3.58-8-8v-24c0-4.42,3.58-8,8-8Z"
-          fill="#f15757"
+          fill="var(--color-esona)"
           strokeWidth="0"
         />
         <path
@@ -144,7 +144,7 @@ export default function Hero({ className }: { className?: string }) {
       <g>
         <path
           d="M110,366.56h24c4.42,0,8,3.58,8,8v24c0,4.42-3.58,8-8,8h-24c-4.42,0-8-3.58-8-8v-24c0-4.42,3.58-8,8-8Z"
-          fill="#f15757"
+          fill="var(--color-esona)"
           strokeWidth="0"
         />
         <path
@@ -172,7 +172,7 @@ export default function Hero({ className }: { className?: string }) {
       <g>
         <path
           d="M110,487.06h24c4.42,0,8,3.58,8,8v24c0,4.42-3.58,8-8,8h-24c-4.42,0-8-3.58-8-8v-24c0-4.42,3.58-8,8-8Z"
-          fill="#f15757"
+          fill="var(--color-esona)"
           strokeWidth="0"
         />
         <path
