@@ -55,7 +55,7 @@ export default function BaseText({
       case 'button':
         return 'font-button text-sm font-medium md:text-base';
       case 'small':
-        return 'font-body text-xs md:text-sm text-neutral-700';
+        return 'font-body text-xs md:text-sm';
       default:
         return 'font-body text-sm font-normal md:text-base';
     }

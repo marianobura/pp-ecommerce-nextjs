@@ -25,7 +25,7 @@ export default function RegisterPage() {
           <BaseText variant="h2">Create an account</BaseText>
           <Logo className="h-8 w-auto shrink-0" />
         </div>
-        <BaseText variant="small">
+        <BaseText variant="small" className="text-neutral-700">
           If you already have an account, you can{' '}
           <Link href="/auth/login" className="text-esona underline">
             sign in here
