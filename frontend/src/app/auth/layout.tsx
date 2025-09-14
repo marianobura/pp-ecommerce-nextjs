@@ -3,9 +3,9 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
     <div className="grid min-h-dvh grid-cols-2">
       <div className="bg-esona size-full max-h-dvh">
         <img
-          src="/auth.jpg"
-          alt="Woman in yellow jacket being happy"
-          className="size-full object-cover object-bottom"
+          src="/auth.png"
+          alt="Black friday decoration with big present in cart"
+          className="pointer-events-none size-full object-cover object-bottom select-none"
         />
       </div>
       <div className="flex size-full items-center justify-center">
