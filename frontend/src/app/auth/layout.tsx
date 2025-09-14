@@ -9,7 +9,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         />
       </div>
       <div className="flex size-full items-center justify-center">
-        <div className="mx-16 w-full max-w-[500px] rounded-4xl border border-neutral-200 bg-white py-6">
+        <div className="rounded-5xl mx-16 w-full max-w-[500px] border border-neutral-200 bg-white py-6">
           {children}
         </div>
       </div>

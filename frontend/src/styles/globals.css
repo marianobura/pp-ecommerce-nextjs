@@ -5,8 +5,12 @@
   --font-subtitle: var(--font-merriweather);
   --font-body: var(--font-roboto);
   --font-button: var(--font-roboto);
+
   --default-transition-duration: 300ms;
+
   --color-esona: #f15757;
+
+  --radius-5xl: 2.625rem;
 }
 
 @layer utilities {
