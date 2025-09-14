@@ -23,7 +23,7 @@ export default function RegisterPage() {
       <div className="mb-4 flex flex-col gap-2 border-b border-neutral-200 px-6 pb-4">
         <div className="flex items-center justify-between gap-12">
           <BaseText variant="h2">Create an account</BaseText>
-          <Logo className="h-auto w-32 shrink-0" />
+          <Logo className="h-8 w-auto shrink-0" />
         </div>
         <BaseText variant="small">
           If you already have an account, you can{' '}
