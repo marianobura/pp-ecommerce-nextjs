@@ -13,10 +13,10 @@ export default async function Home() {
     <>
       <Navbar />
       <main className="container pt-1 pb-3">
-        <div className="relative flex h-[600px] flex-col justify-center rounded-4xl bg-neutral-100 p-12">
+        <div className="bg-primary relative flex h-[600px] flex-col justify-center rounded-4xl p-12">
           <Hero className="absolute right-32 bottom-0 h-[500px]" />
           <BaseText variant="h1" className="line-clamp-2 max-w-[700px] text-balance">
-            Everything You Need, All in <span className="text-esona leading-18">One Place</span>
+            Everything You Need, All in <span className="text-primary leading-18">One Place</span>
           </BaseText>
           <BaseText variant="text" className="max-w-[500px] text-pretty">
             Discover a wide range of products at unbeatable prices. From electronics to fashion, we
@@ -31,15 +31,12 @@ export default async function Home() {
             <Link
               href={`/category/${category.slug}`}
               key={category.slug}
-              className="flex min-w-96 flex-col gap-4 rounded-4xl bg-neutral-100 p-3"
+              className="flex items-center gap-8 rounded-4xl bg-neutral-100 px-12 py-6"
             >
-              <div className="h-32 w-full rounded-3xl bg-neutral-200"></div>
-              <div className="flex justify-between gap-8 p-3">
-                <BaseText variant="h2" className="truncate whitespace-nowrap">
-                  {category.name}
-                </BaseText>
-                <MoveRight size={24} />
-              </div>
+              <BaseText variant="h2" className="truncate whitespace-nowrap">
+                {category.name}
+              </BaseText>
+              <MoveRight size={24} />
             </Link>
           ))}
         </div>

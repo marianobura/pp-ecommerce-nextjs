@@ -21,9 +21,9 @@ export default function BaseButton({
     'rounded-4xl px-6 py-3 transition-colors text-center inline-flex items-center justify-center cursor-pointer';
 
   const variantStyles: Record<string, string> = {
-    primary: 'bg-esona hover:bg-esona/90 text-white',
+    primary: 'bg-primary hover:bg-primary/90 text-white',
     secondary: 'bg-neutral-200 hover:bg-neutral-300',
-    outline: 'border-2 border-esona text-esona hover:bg-esona/10',
+    outline: 'border-2 border-primary text-primary hover:bg-primary/10',
   };
 
   const classes = `${baseStyles} ${variantStyles[variant]} ${className}`;

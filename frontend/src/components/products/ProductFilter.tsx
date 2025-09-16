@@ -54,7 +54,7 @@ export default function ProductFilter({
           <BaseText variant="h2">Filter by</BaseText>
           {hasActiveFilters && (
             <div
-              className="hover:text-esona cursor-pointer rounded-4xl bg-neutral-100 p-2 transition-colors"
+              className="hover:text-primary cursor-pointer rounded-4xl bg-neutral-100 p-2 transition-colors"
               onClick={() => {
                 onSelectCategory(null);
                 onSelectRating(0);
@@ -80,14 +80,14 @@ export default function ProductFilter({
                     key={category.slug}
                     onClick={() => onSelectCategory(category.slug)}
                     className={`group/item flex cursor-pointer items-center gap-2 transition-colors ${
-                      isActive ? 'text-esona font-semibold' : 'hover:text-esona text-neutral-700'
+                      isActive ? 'text-primary font-semibold' : 'hover:text-primary text-foreground'
                     }`}
                   >
                     <div
                       className={`flex size-4 items-center justify-center rounded-4xl border transition-colors ${
                         isActive
-                          ? 'border-esona bg-esona'
-                          : 'group-hover/item:border-esona border-neutral-700'
+                          ? 'border-primary bg-primary'
+                          : 'group-hover/item:border-primary border-neutral-700'
                       }`}
                     >
                       {isActive && <Check size={12} strokeWidth={3} className="text-white" />}
@@ -108,7 +108,7 @@ export default function ProductFilter({
                 <div className="relative mt-2 h-6 w-full">
                   <div className="absolute top-1/2 left-0 h-1 w-full -translate-y-1/2 rounded bg-neutral-200" />
                   <div
-                    className="bg-esona absolute top-1/2 h-1 -translate-y-1/2 rounded"
+                    className="bg-primary absolute top-1/2 h-1 -translate-y-1/2 rounded"
                     style={{
                       left: `${((selectedPrice[0] - minPrice) / (maxPrice - minPrice)) * 100}%`,
                       right: `${100 - ((selectedPrice[1] - minPrice) / (maxPrice - minPrice)) * 100}%`,
@@ -158,14 +158,14 @@ export default function ProductFilter({
                     key={rating}
                     onClick={() => onSelectRating(rating)}
                     className={`group/item flex cursor-pointer items-center gap-2 transition-colors ${
-                      isActive ? 'text-esona font-semibold' : 'hover:text-esona text-neutral-700'
+                      isActive ? 'text-primary font-semibold' : 'hover:text-primary text-foreground'
                     }`}
                   >
                     <div
                       className={`flex size-4 items-center justify-center rounded-4xl border transition-colors ${
                         isActive
-                          ? 'border-esona bg-esona'
-                          : 'group-hover/item:border-esona border-neutral-700'
+                          ? 'border-primary bg-primary'
+                          : 'group-hover/item:border-primary border-neutral-700'
                       }`}
                     >
                       {isActive && <Check size={12} strokeWidth={3} className="text-white" />}
@@ -186,15 +186,15 @@ export default function ProductFilter({
                 onClick={onToggleDiscount}
                 className={`group/item flex cursor-pointer items-start gap-2 transition-colors ${
                   selectedDiscount
-                    ? 'text-esona font-semibold'
-                    : 'hover:text-esona text-neutral-700'
+                    ? 'text-primary font-semibold'
+                    : 'hover:text-primary text-foreground'
                 }`}
               >
                 <div
                   className={`mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-4xl border transition-colors ${
                     selectedDiscount
-                      ? 'border-esona bg-esona'
-                      : 'group-hover/item:border-esona border-neutral-700'
+                      ? 'border-primary bg-primary'
+                      : 'group-hover/item:border-primary border-neutral-700'
                   }`}
                 >
                   {selectedDiscount && <Check size={12} strokeWidth={3} className="text-white" />}

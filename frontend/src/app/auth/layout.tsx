@@ -1,7 +1,7 @@
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="grid min-h-dvh grid-cols-2">
-      <div className="bg-esona size-full max-h-dvh">
+      <div className="bg-primary size-full max-h-dvh">
         <img
           src="/auth.png"
           alt="Black friday decoration with big present in cart"

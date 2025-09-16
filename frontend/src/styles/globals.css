@@ -8,7 +8,10 @@
 
   --default-transition-duration: 300ms;
 
-  --color-esona: #f15757;
+  --color-primary: #f15757;
+  --color-secondary: #ffb400;
+  --color-foreground: #404040;
+  --color-muted: #d4d4d4;
 
   --radius-5xl: 2.625rem;
 }
@@ -36,7 +39,7 @@ body {
   pointer-events: all;
   height: 1rem;
   width: 1rem;
-  background-color: var(--color-esona);
+  background-color: var(--color-primary);
   border-radius: 9999px;
   cursor: pointer;
   margin-top: -0.45rem;
@@ -47,7 +50,7 @@ body {
   pointer-events: all;
   height: 1rem;
   width: 1rem;
-  background-color: var(--color-esona);
+  background-color: var(--color-primary);
   border-radius: 9999px;
   cursor: pointer;
 }

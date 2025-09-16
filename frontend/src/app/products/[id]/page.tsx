@@ -19,7 +19,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             </div>
             <div className="flex h-full max-h-[640px] flex-col justify-between gap-16 overflow-hidden">
               <div className="flex flex-col gap-2">
-                <BaseText variant="text-semibold" className="text-esona">
+                <BaseText variant="text-semibold" className="text-primary">
                   {product?.brand}
                 </BaseText>
                 <BaseText variant="h1">{product?.title}</BaseText>
@@ -27,7 +27,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
               </div>
               <div className="flex flex-col gap-4 overflow-hidden">
                 <div className="flex gap-2">
-                  <div className="bg-esona/10 text-esona flex items-center gap-2 rounded-4xl px-4 py-2">
+                  <div className="bg-primary/10 text-primary flex items-center gap-2 rounded-4xl px-4 py-2">
                     <Star size={24} fill="currentColor" />
                     <BaseText variant="h3">{product?.rating} / 5</BaseText>
                   </div>
@@ -41,7 +41,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                       <div className="h-fit w-full rounded-lg bg-neutral-100 p-4" key={index}>
                         <div className="flex items-center gap-2">
                           <BaseText variant="text-semibold">{review.reviewerName}</BaseText>
-                          <div className="bg-esona/10 text-esona flex items-center gap-1 rounded-4xl px-3 py-1">
+                          <div className="bg-primary/10 text-primary flex items-center gap-1 rounded-4xl px-3 py-1">
                             <Star size={16} fill="currentColor" />
                             <BaseText variant="text">{review.rating} / 5</BaseText>
                           </div>
@@ -55,7 +55,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                       <div className="h-fit w-full rounded-lg bg-neutral-100 p-4" key={index}>
                         <div className="flex items-center gap-2">
                           <BaseText variant="text-semibold">{review.reviewerName}</BaseText>
-                          <div className="bg-esona/10 text-esona flex items-center gap-1 rounded-4xl px-3 py-1">
+                          <div className="bg-primary/10 text-primary flex items-center gap-1 rounded-4xl px-3 py-1">
                             <Star size={16} fill="currentColor" />
                             <BaseText variant="text">{review.rating} / 5</BaseText>
                           </div>
@@ -89,7 +89,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             <div className="flex items-center gap-4">
               {product && hasValidDiscount(product) ? (
                 <div className="flex flex-col items-end">
-                  <BaseText variant="h3" className="text-esona">
+                  <BaseText variant="h3" className="text-primary">
                     ${discountedPrice}
                   </BaseText>
                   <BaseText variant="text" className="line-through">
@@ -97,7 +97,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                   </BaseText>
                 </div>
               ) : (
-                <BaseText variant="h3" className="text-esona">
+                <BaseText variant="h3" className="text-primary">
                   ${product?.price}
                 </BaseText>
               )}

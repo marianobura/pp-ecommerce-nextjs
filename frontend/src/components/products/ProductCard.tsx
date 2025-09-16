@@ -19,7 +19,7 @@ export default function ProductCard({ product }: { product: Product }) {
         className={`flex aspect-square rounded-4xl bg-neutral-100 p-12 ${hasValidDiscount(product) ? 'relative' : ''}`}
       >
         {hasValidDiscount(product) && (
-          <div className="bg-esona absolute top-3 left-3 flex size-12 items-center justify-center rounded-4xl text-white">
+          <div className="bg-primary absolute top-3 left-3 flex size-12 items-center justify-center rounded-4xl text-white">
             <BaseText variant="text-semibold">{product?.discountPercentage.toFixed()}%</BaseText>
           </div>
         )}
@@ -41,7 +41,7 @@ export default function ProductCard({ product }: { product: Product }) {
                   key={index}
                   size={20}
                   fill={index < fillStars ? 'currentColor' : 'none'}
-                  className="text-esona"
+                  className="text-primary"
                 />
               ))}
             </div>

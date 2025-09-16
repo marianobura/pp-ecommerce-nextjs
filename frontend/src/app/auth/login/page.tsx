@@ -23,9 +23,9 @@ export default function LoginPage() {
           <BaseText variant="h2">Sign in</BaseText>
           <Logo className="h-8 w-auto shrink-0" />
         </div>
-        <BaseText variant="small" className="text-neutral-700">
+        <BaseText variant="small" className="text-foreground">
           If you don't have an account, you can{' '}
-          <Link href="/auth/register" className="text-esona underline">
+          <Link href="/auth/register" className="text-primary underline">
             register here
           </Link>
           .

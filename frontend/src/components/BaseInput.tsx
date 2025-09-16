@@ -35,7 +35,7 @@ export default function BaseInput({
         </label>
       )}
       <div
-        className={`focus-within:border-esona focus-within:ring-esona h-12 overflow-hidden rounded-4xl border border-neutral-200 transition focus-within:ring-1 ${password ? 'flex' : ''}`}
+        className={`focus-within:border-primary focus-within:ring-primary h-12 overflow-hidden rounded-4xl border border-neutral-200 transition focus-within:ring-1 ${password ? 'flex' : ''}`}
       >
         <input
           type={inputType}
@@ -49,13 +49,13 @@ export default function BaseInput({
             {inputType === 'password' ? (
               <Eye
                 size={24}
-                className="hover:text-esona cursor-pointer text-neutral-600 transition-colors select-none"
+                className="hover:text-primary cursor-pointer text-neutral-600 transition-colors select-none"
                 onClick={handleTogglePassword}
               />
             ) : (
               <EyeOff
                 size={24}
-                className="hover:text-esona cursor-pointer text-neutral-600 transition-colors select-none"
+                className="hover:text-primary cursor-pointer text-neutral-600 transition-colors select-none"
                 onClick={handleTogglePassword}
               />
             )}
