@@ -48,13 +48,13 @@ export default function ProductFilter({
   };
 
   return (
-    <div className="sticky top-8 w-64">
+    <div className="xs:w-64 sticky top-8 w-36">
       <div className="flex flex-col gap-4">
-        <div className="mr-8 flex items-center justify-between">
+        <div className="mr-4 flex items-center justify-between md:mr-8">
           <BaseText variant="h2">Filter by</BaseText>
           {hasActiveFilters && (
             <div
-              className="hover:text-primary cursor-pointer rounded-4xl bg-neutral-100 p-2 transition-colors"
+              className="hover:text-primary cursor-pointer rounded-4xl bg-neutral-100 p-1.5 transition-colors"
               onClick={() => {
                 onSelectCategory(null);
                 onSelectRating(0);
@@ -68,23 +68,23 @@ export default function ProductFilter({
         </div>
         <div className="flex border-spacing-y-2 flex-col divide-y divide-neutral-200">
           <details className="group/details">
-            <summary className="mr-8 flex cursor-pointer items-center justify-between pb-2">
+            <summary className="mr-4 flex cursor-pointer items-center justify-between pb-2 md:mr-8">
               <BaseText variant="text-semibold">Category</BaseText>
               <Plus size={16} className="transition-transform group-open/details:rotate-45" />
             </summary>
-            <div className="mr-8 flex flex-col gap-1 pb-4">
+            <div className="mr-4 flex flex-col gap-1 pb-4 md:mr-8">
               {categories.map((category) => {
                 const isActive = selectedCategory === category.slug;
                 return (
                   <div
                     key={category.slug}
                     onClick={() => onSelectCategory(category.slug)}
-                    className={`group/item flex cursor-pointer items-center gap-2 transition-colors ${
+                    className={`group/item flex cursor-pointer items-start gap-2 transition-colors ${
                       isActive ? 'text-primary font-semibold' : 'hover:text-primary text-foreground'
                     }`}
                   >
                     <div
-                      className={`flex size-4 items-center justify-center rounded-4xl border transition-colors ${
+                      className={`flex size-4 shrink-0 items-center justify-center rounded-4xl border transition-colors ${
                         isActive
                           ? 'border-primary bg-primary'
                           : 'group-hover/item:border-primary border-neutral-700'
@@ -99,11 +99,11 @@ export default function ProductFilter({
             </div>
           </details>
           <details className="group/details pt-2">
-            <summary className="mr-8 flex cursor-pointer items-center justify-between pb-2">
+            <summary className="mr-4 flex cursor-pointer items-center justify-between pb-2 md:mr-8">
               <BaseText variant="text-semibold">Price</BaseText>
               <Plus size={16} className="transition-transform group-open/details:rotate-45" />
             </summary>
-            <div className="mr-8 pb-4">
+            <div className="mr-4 pb-4 md:mr-8">
               <div className="flex flex-col gap-2">
                 <div className="relative mt-2 h-6 w-full">
                   <div className="absolute top-1/2 left-0 h-1 w-full -translate-y-1/2 rounded bg-neutral-200" />
@@ -146,11 +146,11 @@ export default function ProductFilter({
             </div>
           </details>
           <details className="group/details pt-2">
-            <summary className="mr-8 flex cursor-pointer items-center justify-between pb-2">
+            <summary className="mr-4 flex cursor-pointer items-center justify-between pb-2 md:mr-8">
               <BaseText variant="text-semibold">Rating</BaseText>
               <Plus size={16} className="transition-transform group-open/details:rotate-45" />
             </summary>
-            <div className="mr-8 flex flex-col gap-2 pb-4">
+            <div className="mr-4 flex flex-col gap-2 pb-4 md:mr-8">
               {availableRatings.map((rating) => {
                 const isActive = selectedRating === rating;
                 return (
@@ -177,11 +177,11 @@ export default function ProductFilter({
             </div>
           </details>
           <details className="group/details pt-2">
-            <summary className="mr-8 flex cursor-pointer items-center justify-between pb-2">
+            <summary className="mr-4 flex cursor-pointer items-center justify-between pb-2 md:mr-8">
               <BaseText variant="text-semibold">Discount</BaseText>
               <Plus size={16} className="transition-transform group-open/details:rotate-45" />
             </summary>
-            <div className="mr-8 flex flex-col gap-2 pb-4">
+            <div className="mr-4 flex flex-col gap-2 pb-4 md:mr-8">
               <div
                 onClick={onToggleDiscount}
                 className={`group/item flex cursor-pointer items-start gap-2 transition-colors ${

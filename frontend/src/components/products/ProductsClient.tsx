@@ -43,7 +43,7 @@ export default function ProductsClient({
   }, [products, selectedCategory, selectedPrice, selectedRating, selectedDiscount]);
 
   return (
-    <div className="container pt-16 pb-4">
+    <div className="container pt-8 pb-4 md:pt-16">
       <div className="flex">
         <div className="border-r border-neutral-200">
           <ProductFilter
@@ -65,7 +65,7 @@ export default function ProductsClient({
             maxPrice={maxPrice}
           />
         </div>
-        <div className="ml-8 flex flex-1 flex-col gap-4">
+        <div className="ml-4 flex flex-1 flex-col gap-4 md:ml-8">
           <div className="flex items-center justify-between">
             <BaseText variant="h2">{`Product List (${filteredProducts.length})`}</BaseText>
           </div>
