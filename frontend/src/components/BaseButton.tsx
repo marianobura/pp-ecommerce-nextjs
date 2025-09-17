@@ -4,7 +4,7 @@ import BaseText from './BaseText';
 
 type BaseButtonProps = {
   children: ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary' | 'neutral' | 'outline';
   tag?: 'button' | 'link';
   className?: string;
   href?: string;
@@ -22,7 +22,8 @@ export default function BaseButton({
 
   const variantStyles: Record<string, string> = {
     primary: 'bg-primary hover:bg-primary/90 text-white',
-    secondary: 'bg-neutral-200 hover:bg-neutral-300',
+    secondary: 'bg-secondary hover:bg-secondary/80',
+    neutral: 'bg-neutral-200 hover:bg-neutral-300',
     outline: 'border-2 border-primary text-primary hover:bg-primary/10',
   };
 
