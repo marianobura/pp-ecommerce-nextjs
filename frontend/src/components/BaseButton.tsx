@@ -13,6 +13,7 @@ type BaseButtonProps = {
 export default function BaseButton({
   children,
   variant = 'primary',
+  tag = 'button',
   className = '',
   href,
   ...props
