@@ -3,7 +3,7 @@ import { Category } from '@/types/category';
 
 const BASE_URL = 'https://dummyjson.com';
 
-export async function getProducts(limit: number): Promise<Product[]> {
+export async function getProducts({ limit = 0 }): Promise<Product[]> {
   try {
     const res = await fetch(`${BASE_URL}/products?limit=${limit}`, {
       cache: 'no-store',
