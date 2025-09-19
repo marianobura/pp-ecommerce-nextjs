@@ -4,7 +4,7 @@ import Hero from '@/components/icons/Hero';
 
 export default function HomeHeader() {
   return (
-    <main className="container pt-1 pb-3">
+    <main className="container pt-1">
       <div className="mt-2 flex flex-col gap-4 md:mt-8 md:flex-row lg:mt-16">
         <div className="order-2 flex flex-col gap-4 md:order-1 md:basis-3/5">
           <div className="rounded-5xl bg-secondary/20 flex grow-1 items-center p-6 md:p-12">

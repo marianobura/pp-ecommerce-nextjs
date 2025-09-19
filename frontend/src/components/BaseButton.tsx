@@ -24,7 +24,7 @@ export default function BaseButton({
   const variantStyles: Record<string, string> = {
     primary: 'bg-primary hover:bg-primary/90 text-white',
     secondary: 'bg-secondary hover:bg-secondary/80',
-    neutral: 'bg-neutral-200 hover:bg-neutral-300',
+    neutral: 'bg-neutral-100 hover:bg-neutral-200',
     outline: 'border-2 border-primary text-primary hover:bg-primary/10',
   };
 
