@@ -1,15 +1,22 @@
 'use client';
-import { useState } from 'react';
+
 import { Product } from '@/types/product';
 import BaseButton from '@/components/BaseButton';
+import { useCart } from '@/context/CartContext';
 
-export function ProductButton({}: { product: Product }) {
-  const [inCart, setInCart] = useState(false);
+export function ProductButton({ product }: { product: Product }) {
+  const { addToCart, removeFromCart, isInCart } = useCart();
+
+  const inCart = isInCart(product.id);
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setInCart(!inCart);
+    if (inCart) {
+      removeFromCart(product.id);
+    } else {
+      addToCart(product.id);
+    }
   };
 
   return (

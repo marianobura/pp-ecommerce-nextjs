@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Poppins, Merriweather, Roboto } from 'next/font/google';
 import '@/styles/globals.css';
+import { CartProvider } from '@/context/CartContext';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -37,7 +38,7 @@ export default function RootLayout({
         className={`${poppins.variable} ${merriweather.variable} ${roboto.variable} min-h-screen`}
         cz-shortcut-listen="true"
       >
-        {children}
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );
