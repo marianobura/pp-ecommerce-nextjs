@@ -16,6 +16,19 @@ export async function getProducts({ limit = 0 }): Promise<Product[]> {
   }
 }
 
+export async function getProductsByQuery(query: string): Promise<Product[]> {
+  try {
+    const res = await fetch(`${BASE_URL}/products${query}`, {
+      cache: 'no-store',
+    });
+
+    const data = await res.json();
+    return data.products;
+  } catch (error) {
+    return [];
+  }
+}
+
 export async function getProduct(id: string): Promise<Product | null> {
   try {
     const res = await fetch(`${BASE_URL}/products/${id}`);
