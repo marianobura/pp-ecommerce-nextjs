@@ -69,7 +69,7 @@ export default function ProductsClient({
           <div className="flex items-center justify-between">
             <BaseText variant="h2">{`Product List (${filteredProducts.length})`}</BaseText>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="xs:grid-cols-2 grid grid-cols-1 gap-8 lg:grid-cols-3">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

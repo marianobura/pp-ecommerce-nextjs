@@ -49,7 +49,7 @@ export default function ProductFilter({
   };
 
   return (
-    <div className="xs:w-64 sticky top-8 w-36">
+    <div className="sticky top-8 w-36 md:w-64">
       <div className="flex flex-col gap-4">
         <div className="mr-4 flex items-center justify-between md:mr-8">
           <BaseText variant="h2">Filter by</BaseText>

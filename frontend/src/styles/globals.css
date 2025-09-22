@@ -15,7 +15,8 @@
 
   --radius-5xl: 2.625rem;
 
-  --breakpoint-xs: 32.5rem;
+  --breakpoint-xxs: 22rem;
+  --breakpoint-xs: 34rem;
 }
 
 @layer utilities {

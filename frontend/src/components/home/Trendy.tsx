@@ -43,7 +43,7 @@ export default function HomeTrendy() {
       <BaseText variant="h2" className="mb-3 text-center uppercase md:mb-6">
         Our trendy products
       </BaseText>
-      <div className="mb-4 flex items-center justify-center gap-4">
+      <div className="xxs:gap-4 mb-4 flex items-center justify-center">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -60,7 +60,7 @@ export default function HomeTrendy() {
           </button>
         ))}
       </div>
-      <div className="mb-8 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="xxs:grid-cols-2 mb-8 grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-4">
         {loading
           ? [...Array(12)].map((_, index) => (
               <div className="group flex flex-col overflow-hidden" key={index}>

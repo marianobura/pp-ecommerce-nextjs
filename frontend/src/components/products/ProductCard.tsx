@@ -16,10 +16,10 @@ export default function ProductCard({ product }: { product: Product }) {
       className="group flex flex-col overflow-hidden"
     >
       <div
-        className={`flex aspect-square rounded-4xl bg-neutral-100 p-12 ${hasValidDiscount(product) ? 'relative' : ''}`}
+        className={`xs:p-8 flex aspect-square rounded-4xl bg-neutral-100 p-4 ${hasValidDiscount(product) ? 'relative' : ''}`}
       >
         {hasValidDiscount(product) && (
-          <div className="bg-primary absolute top-3 left-3 flex size-12 items-center justify-center rounded-4xl text-white">
+          <div className="bg-primary absolute top-3 left-3 flex size-10 items-center justify-center rounded-4xl text-white md:size-12">
             <BaseText variant="text-semibold">{product?.discountPercentage.toFixed()}%</BaseText>
           </div>
         )}
