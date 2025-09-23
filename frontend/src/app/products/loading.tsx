@@ -3,7 +3,7 @@ export default function Loading() {
     <div className="container pt-8 pb-4 md:pt-16">
       <div className="flex animate-pulse">
         <div className="border-r border-neutral-200">
-          <div className="xs:w-64 sticky top-8 w-36">
+          <div className="sticky top-8 w-36 md:w-64">
             <div className="mr-4 flex flex-col gap-4 md:mr-8">
               <div className="h-7 shrink-0 rounded-4xl bg-gray-200 md:h-8"></div>
               <div className="h-96 rounded-4xl bg-gray-200"></div>
@@ -14,7 +14,7 @@ export default function Loading() {
           <div className="flex items-center justify-between">
             <div className="h-7 w-36 rounded-4xl bg-gray-200 md:h-8"></div>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="xs:grid-cols-2 grid grid-cols-1 gap-8 lg:grid-cols-3">
             {[...Array(12)].map((_, index) => (
               <div className="group flex flex-col overflow-hidden" key={index}>
                 <div className="flex aspect-square rounded-4xl bg-gray-200"></div>
