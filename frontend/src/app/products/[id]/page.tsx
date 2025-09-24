@@ -12,20 +12,28 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   return (
     <>
       <main className="container flex flex-col justify-center">
-        <div className="flex items-center justify-center">
-          <div className="grid grid-cols-2 items-center justify-center gap-4">
-            <div className="flex h-full items-center justify-center overflow-hidden rounded-4xl bg-neutral-100">
-              <img src={product?.images[0]} alt={product?.title} className="aspect-square" />
+        <div className="my-3 flex items-center justify-center">
+          <div className="grid grid-cols-1 items-center justify-center gap-4 sm:grid-cols-2">
+            <div className="flex h-full max-h-[500px] items-center justify-center overflow-hidden rounded-4xl bg-neutral-100 xl:max-h-[640px]">
+              <img
+                src={product?.images[0]}
+                alt={product?.title}
+                className="aspect-square h-full max-h-80 object-contain sm:max-h-[500px]"
+              />
             </div>
-            <div className="flex h-full max-h-[640px] flex-col justify-between gap-16 overflow-hidden">
-              <div className="flex flex-col gap-2">
+            <div className="flex h-full max-h-[500px] flex-col justify-between gap-4 overflow-hidden md:gap-8 lg:gap-16 xl:max-h-[640px]">
+              <div className="flex flex-col">
                 <BaseText variant="text-semibold" className="text-primary">
                   {product?.brand}
                 </BaseText>
-                <BaseText variant="h1">{product?.title}</BaseText>
-                <BaseText variant="text">{product?.description}</BaseText>
+                <BaseText variant="h1" className="mt-1 sm:mt-2">
+                  {product?.title}
+                </BaseText>
+                <BaseText variant="text" className="mt-2">
+                  {product?.description}
+                </BaseText>
               </div>
-              <div className="flex flex-col gap-4 overflow-hidden">
+              <div className="flex flex-col gap-2 overflow-hidden sm:gap-4">
                 <div className="flex gap-2">
                   <div className="bg-primary/10 text-primary flex items-center gap-2 rounded-4xl px-4 py-2">
                     <Star size={24} fill="currentColor" />
@@ -35,7 +43,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                     <BaseText variant="h3">{product?.stock} in stock</BaseText>
                   </div>
                 </div>
-                <div className="overflow-y-auto rounded-4xl pr-2">
+                <div className="overflow-y-auto rounded-4xl">
                   <div className="flex flex-col gap-2 overflow-hidden rounded-4xl">
                     {product?.reviews.map((review, index) => (
                       <div className="h-fit w-full rounded-lg bg-neutral-100 p-4" key={index}>
@@ -73,22 +81,22 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         </div>
       </main>
       <footer className="border-t border-neutral-200">
-        <div className="container flex">
-          <div className="border-r border-neutral-200 p-10 pl-0">
-            <BaseText variant="text-semibold">Order Summary</BaseText>
+        <div className="container flex flex-col sm:flex-row">
+          <div className="flex items-center justify-center border-neutral-200 p-5 pb-0 pl-0 sm:border-r md:p-5 lg:p-10">
+            <BaseText variant="h3">Order Summary</BaseText>
           </div>
-          <div className="flex grow items-center justify-between gap-8 pl-10">
+          <div className="items-left flex grow flex-col justify-between gap-2 py-3 sm:py-5 sm:pl-5 lg:pl-10 xl:flex-row xl:items-center">
             <div className="flex flex-col">
-              <BaseText variant="h3">{product?.title}</BaseText>
-              <div className="flex gap-2">
-                <BaseText variant="text">{product?.shippingInformation}</BaseText>•
-                <BaseText variant="text">{product?.warrantyInformation}</BaseText>•
-                <BaseText variant="text">{product?.returnPolicy}</BaseText>
+              <BaseText variant="text-semibold">Additional Information:</BaseText>
+              <div className="flex flex-wrap gap-1">
+                <BaseText variant="text">{product?.shippingInformation}.</BaseText>
+                <BaseText variant="text">{product?.warrantyInformation}.</BaseText>
+                <BaseText variant="text">{product?.returnPolicy}.</BaseText>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="xs:flex-row xs:gap-4 flex flex-col items-center gap-2">
               {product && hasValidDiscount(product) ? (
-                <div className="flex flex-col items-end">
+                <div className="flex items-center gap-2 xl:flex-col xl:items-end xl:gap-0">
                   <BaseText variant="h3" className="text-primary">
                     ${discountedPrice}
                   </BaseText>
