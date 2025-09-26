@@ -82,7 +82,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
       </main>
       <footer className="border-t border-neutral-200">
         <div className="container flex flex-col sm:flex-row">
-          <div className="flex items-center justify-center border-neutral-200 pt-5 sm:border-r sm:pr-5 md:p-5 lg:p-10">
+          <div className="flex items-center justify-center border-neutral-200 pt-5 sm:border-r sm:pr-5 sm:pb-5 lg:p-10">
             <BaseText variant="h3">Order Summary</BaseText>
           </div>
           <div className="items-left flex grow flex-col justify-between gap-2 py-3 sm:py-5 sm:pl-5 lg:pl-10 xl:flex-row xl:items-center">
