@@ -86,7 +86,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             <BaseText variant="h3">Order Summary</BaseText>
           </div>
           <div className="items-left flex grow flex-col justify-between gap-2 py-3 sm:py-5 sm:pl-5 lg:pl-10 xl:flex-row xl:items-center">
-            <div className="flex flex-col">
+            <div className="xs:pb-16 flex flex-col pb-28 sm:pb-0">
               <BaseText variant="text-semibold" className="text-center sm:text-left">
                 Additional Information
               </BaseText>
@@ -96,7 +96,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                 <BaseText variant="text">{product?.returnPolicy}.</BaseText>
               </div>
             </div>
-            <div className="xs:flex-row xs:gap-4 flex flex-col items-center gap-2">
+            <div className="xs:flex-row xs:gap-4 fixed bottom-0 left-0 flex w-full flex-col items-center justify-center gap-2 border-t border-neutral-200 bg-white py-3 sm:static sm:justify-start sm:border-0 sm:py-0 xl:justify-end">
               {product && hasValidDiscount(product) ? (
                 <div className="flex items-center gap-2 xl:flex-col xl:items-end xl:gap-0">
                   <BaseText variant="h3" className="text-primary">

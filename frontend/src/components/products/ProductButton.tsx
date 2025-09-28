@@ -20,11 +20,7 @@ export function ProductButton({ product }: { product: Product }) {
   };
 
   return (
-    <BaseButton
-      variant={inCart ? 'primary' : 'neutral'}
-      className="w-full sm:w-fit"
-      onClick={handleClick}
-    >
+    <BaseButton variant={inCart ? 'primary' : 'neutral'} className="w-fit" onClick={handleClick}>
       {inCart ? 'Remove from Cart' : 'Add to Cart'}
     </BaseButton>
   );
