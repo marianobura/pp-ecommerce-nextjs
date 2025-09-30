@@ -6,8 +6,8 @@ export default function HomeHeader() {
   return (
     <main className="border-b border-neutral-200">
       <div className="container">
-        <div className="my-3 flex flex-col gap-4 md:my-8 md:flex-row lg:my-16">
-          <div className="order-2 flex flex-col gap-4 md:order-1 md:basis-3/5">
+        <div className="my-3 flex gap-4 md:my-8 lg:my-16">
+          <div className="flex flex-col gap-4 md:basis-3/5">
             <div className="rounded-5xl bg-secondary/20 flex grow-1 items-center p-6 md:p-12">
               <BaseText
                 variant="h1"
@@ -28,8 +28,8 @@ export default function HomeHeader() {
               </div>
             </div>
           </div>
-          <div className="rounded-5xl order-1 flex items-center justify-center overflow-hidden bg-neutral-100 md:order-2 md:min-h-[500px] md:basis-2/5">
-            <Hero className="max-h-64 p-6 md:h-[500px] md:max-h-none md:p-12" />
+          <div className="rounded-5xl hidden min-h-[500px] basis-2/5 items-center justify-center overflow-hidden bg-neutral-100 md:flex">
+            <Hero className="h-[500px] p-12" />
           </div>
         </div>
       </div>

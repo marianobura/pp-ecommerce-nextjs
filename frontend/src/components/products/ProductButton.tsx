@@ -4,7 +4,7 @@ import { Product } from '@/types/product';
 import BaseButton from '@/components/BaseButton';
 import { useCart } from '@/context/CartContext';
 
-export function ProductButton({ product }: { product: Product }) {
+export function ProductButton({ product, className }: { product: Product; className?: string }) {
   const { addToCart, removeFromCart, isInCart } = useCart();
 
   const inCart = isInCart(product.id);
@@ -20,7 +20,11 @@ export function ProductButton({ product }: { product: Product }) {
   };
 
   return (
-    <BaseButton variant={inCart ? 'primary' : 'neutral'} className="w-fit" onClick={handleClick}>
+    <BaseButton
+      variant={inCart ? 'primary' : 'neutral'}
+      className={className}
+      onClick={handleClick}
+    >
       {inCart ? 'Remove from Cart' : 'Add to Cart'}
     </BaseButton>
   );
