@@ -102,7 +102,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                   <BaseText variant="h3" className="text-primary">
                     ${discountedPrice}
                   </BaseText>
-                  <BaseText variant="text" className="line-through">
+                  <BaseText variant="text" className="text-foreground/60 line-through">
                     ${product?.price}
                   </BaseText>
                 </div>
@@ -111,7 +111,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                   ${product?.price}
                 </BaseText>
               )}
-              {product && <ProductButton product={product} />}
+              {product && <ProductButton product={product} className="xs:w-fit w-full" />}
             </div>
           </div>
         </div>

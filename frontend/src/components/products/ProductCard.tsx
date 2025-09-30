@@ -52,7 +52,7 @@ export default function ProductCard({ product }: { product: Product }) {
           {hasValidDiscount(product) ? (
             <div className="flex items-center gap-2">
               <BaseText variant="h3">${discountedPrice}</BaseText>
-              <BaseText variant="text" className="line-through">
+              <BaseText variant="text" className="text-foreground/60 line-through">
                 ${product?.price}
               </BaseText>
             </div>
