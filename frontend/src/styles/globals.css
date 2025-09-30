@@ -17,6 +17,8 @@
 
   --breakpoint-xxs: 22rem;
   --breakpoint-xs: 34rem;
+
+  --text-xxs: 0.625rem;
 }
 
 @layer utilities {

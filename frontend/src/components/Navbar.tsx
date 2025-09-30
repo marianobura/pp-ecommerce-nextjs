@@ -4,6 +4,7 @@ import { Handbag, UserRound } from 'lucide-react';
 import Link from 'next/link';
 import Logo from '@/components/icons/Logo';
 import { useCart } from '@/context/CartContext';
+import BaseText from '@/components/BaseText';
 
 export default function Navbar() {
   const { totalItems } = useCart();
@@ -29,7 +30,12 @@ export default function Navbar() {
           >
             <Handbag size={24} />
             {totalItems > 0 && (
-              <span className="bg-primary absolute top-2 right-2 size-2 rounded-4xl"></span>
+              <BaseText
+                variant="caption"
+                className="bg-primary absolute top-0 right-0 flex min-h-5 min-w-5 items-center justify-center rounded-4xl border-2 border-white px-1 text-white"
+              >
+                {totalItems}
+              </BaseText>
             )}
           </div>
           <div

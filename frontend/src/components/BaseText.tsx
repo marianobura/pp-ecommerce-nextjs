@@ -1,7 +1,16 @@
 import React, { JSX } from 'react';
 import clsx from 'clsx';
 
-type Variant = 'h1' | 'h2' | 'h3' | 'text-semibold' | 'text' | 'button-bold' | 'button' | 'small';
+type Variant =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'text-semibold'
+  | 'text'
+  | 'button-bold'
+  | 'button'
+  | 'small'
+  | 'caption';
 
 interface BaseTextProps extends React.HTMLAttributes<HTMLElement> {
   variant?: Variant;
@@ -33,6 +42,8 @@ export default function BaseText({
         return 'span';
       case 'small':
         return 'span';
+      case 'caption':
+        return 'span';
       default:
         return 'p';
     }
@@ -56,6 +67,8 @@ export default function BaseText({
         return 'font-button text-sm font-medium md:text-base';
       case 'small':
         return 'font-body text-xs md:text-sm';
+      case 'caption':
+        return 'font-body text-xxs font-bold';
       default:
         return 'font-body text-sm font-normal md:text-base';
     }
