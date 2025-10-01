@@ -1,5 +1,5 @@
-import BaseButton from '@/components/BaseButton';
-import BaseText from '@/components/BaseText';
+import BaseButton from '@/components/common/BaseButton';
+import BaseText from '@/components/common/BaseText';
 import Hero from '@/components/icons/Hero';
 
 export default function HomeHeader() {

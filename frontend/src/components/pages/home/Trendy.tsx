@@ -1,11 +1,11 @@
 'use client';
 
-import BaseText from '@/components/BaseText';
-import BaseButton from '@/components/BaseButton';
+import BaseText from '@/components/common/BaseText';
+import BaseButton from '@/components/common/BaseButton';
 import { Product } from '@/types/product';
 import { useState, useEffect } from 'react';
 import { getAllProducts, getBestSellingProducts, getMostPopularProducts } from '@/utils/tab';
-import ProductCard from '@/components/products/ProductCard';
+import ProductCard from '@/components/pages/products/ProductCard';
 
 export default function HomeTrendy() {
   const [activeTab, setActiveTab] = useState<'all' | 'best-seller' | 'top-rated'>('all');

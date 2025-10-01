@@ -1,8 +1,8 @@
 'use client';
 
-import BaseButton from '@/components/BaseButton';
-import BaseInput from '@/components/BaseInput';
-import BaseText from '@/components/BaseText';
+import BaseButton from '@/components/common/BaseButton';
+import BaseInput from '@/components/common/BaseInput';
+import BaseText from '@/components/common/BaseText';
 import Logo from '@/components/icons/Logo';
 import Link from 'next/link';
 import { useState } from 'react';

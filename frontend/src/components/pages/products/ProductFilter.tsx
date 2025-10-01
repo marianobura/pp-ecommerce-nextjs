@@ -1,7 +1,7 @@
-import BaseText from '@/components/BaseText';
+import BaseText from '@/components/common/BaseText';
 import { Check, Plus, RotateCcw } from 'lucide-react';
 import { Category } from '@/types/category';
-import AccordionItem from '@/components/products/AccordionItem';
+import AccordionItem from '@/components/pages/products/AccordionItem';
 
 const PRICE_STEP = 1000;
 const PRICE_MIN_GAP = 5000;

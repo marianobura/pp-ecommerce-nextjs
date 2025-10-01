@@ -1,7 +1,7 @@
 'use client';
 
 import { Product } from '@/types/product';
-import BaseButton from '@/components/BaseButton';
+import BaseButton from '@/components/common/BaseButton';
 import { useCart } from '@/context/CartContext';
 
 export function ProductButton({ product, className }: { product: Product; className?: string }) {

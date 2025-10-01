@@ -1,8 +1,8 @@
 'use client';
 
-import BaseText from '@/components/BaseText';
-import ProductCard from '@/components/products/ProductCard';
-import ProductFilter from '@/components/products/ProductFilter';
+import BaseText from '@/components/common/BaseText';
+import ProductCard from '@/components/pages/products/ProductCard';
+import ProductFilter from '@/components/pages/products/ProductFilter';
 import { hasValidDiscount } from '@/utils/discount';
 import { useMemo, useState } from 'react';
 

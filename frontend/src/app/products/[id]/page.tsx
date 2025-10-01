@@ -1,7 +1,7 @@
-import BaseText from '@/components/BaseText';
+import BaseText from '@/components/common/BaseText';
 import { Star } from 'lucide-react';
 import { getProduct } from '@/services/products';
-import { ProductButton } from '@/components/products/ProductButton';
+import { ProductButton } from '@/components/pages/products/ProductButton';
 import { getDiscountedPrice, hasValidDiscount } from '@/utils/discount';
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {

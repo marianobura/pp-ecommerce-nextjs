@@ -1,6 +1,6 @@
-import Navbar from '@/components/Navbar';
-import HomeHeader from '@/components/home/Header';
-import HomeTrendy from '@/components/home/Trendy';
+import Navbar from '@/components/layout/Navbar';
+import HomeHeader from '@/components/pages/home/Header';
+import HomeTrendy from '@/components/pages/home/Trendy';
 
 export default async function Home() {
   return (

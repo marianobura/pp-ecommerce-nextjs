@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import BaseText from '@/components/BaseText';
+import BaseText from '@/components/common/BaseText';
 import { Star } from 'lucide-react';
-import { ProductButton } from '@/components/products/ProductButton';
+import { ProductButton } from '@/components/pages/products/ProductButton';
 import { Product } from '@/types/product';
 import { getDiscountedPrice, hasValidDiscount } from '@/utils/discount';
 

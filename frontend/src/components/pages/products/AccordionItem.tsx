@@ -2,7 +2,7 @@
 
 import { Plus } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
-import BaseText from '@/components/BaseText';
+import BaseText from '@/components/common/BaseText';
 
 interface AccordionItemProps {
   summary: string;
