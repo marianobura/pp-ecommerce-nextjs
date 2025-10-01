@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import BaseText from '@/components/common/BaseText';
+import BaseText from '@/components/base/BaseText';
 import { Star } from 'lucide-react';
 import { ProductButton } from '@/components/pages/products/ProductButton';
 import { Product } from '@/types/product';

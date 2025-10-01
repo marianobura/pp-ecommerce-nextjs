@@ -1,6 +1,6 @@
 'use client';
 
-import BaseText from '@/components/common/BaseText';
+import BaseText from '@/components/base/BaseText';
 import ProductCard from '@/components/pages/products/ProductCard';
 import ProductFilter from '@/components/pages/products/ProductFilter';
 import { hasValidDiscount } from '@/utils/discount';

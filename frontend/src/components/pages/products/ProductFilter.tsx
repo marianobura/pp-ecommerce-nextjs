@@ -1,4 +1,4 @@
-import BaseText from '@/components/common/BaseText';
+import BaseText from '@/components/base/BaseText';
 import { Check, Plus, RotateCcw } from 'lucide-react';
 import { Category } from '@/types/category';
 import AccordionItem from '@/components/pages/products/AccordionItem';

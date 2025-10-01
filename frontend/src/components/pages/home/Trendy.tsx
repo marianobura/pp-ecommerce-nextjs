@@ -1,7 +1,7 @@
 'use client';
 
-import BaseText from '@/components/common/BaseText';
-import BaseButton from '@/components/common/BaseButton';
+import BaseText from '@/components/base/BaseText';
+import BaseButton from '@/components/base/BaseButton';
 import { Product } from '@/types/product';
 import { useState, useEffect } from 'react';
 import { getAllProducts, getBestSellingProducts, getMostPopularProducts } from '@/utils/tab';

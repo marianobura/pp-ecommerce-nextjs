@@ -4,7 +4,7 @@ import { Handbag, UserRound } from 'lucide-react';
 import Link from 'next/link';
 import Logo from '@/components/icons/Logo';
 import { useCart } from '@/context/CartContext';
-import BaseText from '@/components/common/BaseText';
+import BaseText from '@/components/base/BaseText';
 
 export default function Navbar() {
   const { totalItems } = useCart();
