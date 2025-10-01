@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import BaseText from './BaseText';
+import BaseText from '@/components/base/BaseText';
 
 type BaseButtonProps = {
   children: ReactNode;
