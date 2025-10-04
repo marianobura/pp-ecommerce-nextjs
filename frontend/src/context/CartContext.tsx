@@ -1,12 +1,13 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { Product } from '@/types/product';
 
 type CartContextType = {
-  cart: number[];
-  addToCart: (id: number) => void;
-  removeFromCart: (id: number) => void;
-  isInCart: (id: number) => boolean;
+  cart: Product[];
+  addToCart: (product: Product) => void;
+  removeFromCart: (id: Product['id']) => void;
+  isInCart: (id: Product['id']) => boolean;
   clearCart: () => void;
   totalItems: number;
 };
@@ -14,7 +15,7 @@ type CartContextType = {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<number[]>([]);
+  const [cart, setCart] = useState<Product[]>([]);
 
   useEffect(() => {
     const storedCart = localStorage.getItem('cart');
@@ -27,22 +28,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (id: number) => {
+  const addToCart = (product: Product) => {
     setCart((prev) => {
-      if (prev.includes(id)) return prev;
-      return [...prev, id];
+      if (prev.find((p) => p.id === product.id)) return prev;
+      return [...prev, product];
     });
   };
 
-  const removeFromCart = (id: number) => {
-    setCart((prev) => prev.filter((item) => item !== id));
+  const removeFromCart = (id: Product['id']) => {
+    setCart((prev) => prev.filter((product) => product.id !== id));
   };
 
   const clearCart = () => {
     setCart([]);
   };
 
-  const isInCart = (id: number) => cart.includes(id);
+  const isInCart = (id: Product['id']) => {
+    return cart.some((product) => product.id === id);
+  };
 
   const totalItems = cart.length;
 

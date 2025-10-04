@@ -15,7 +15,7 @@ export function ProductButton({ product, className }: { product: Product; classN
     if (inCart) {
       removeFromCart(product.id);
     } else {
-      addToCart(product.id);
+      addToCart(product);
     }
   };
 
