@@ -5,12 +5,16 @@ import Link from 'next/link';
 import Logo from '@/components/icons/Logo';
 import { useCart } from '@/context/CartContext';
 import BaseText from '@/components/base/BaseText';
+import { useState } from 'react';
+import Sheet from '@/components/ui/Sheet';
+import BaseButton from '@/components/base/BaseButton';
 
 export default function Navbar() {
-  const { totalItems } = useCart();
+  const { cart, totalItems, removeFromCart } = useCart();
+  const [openCart, setOpenCart] = useState(false);
 
   const handleCart = () => {
-    alert('Cart opened');
+    setOpenCart(true);
   };
 
   const handleUser = () => {
@@ -46,6 +50,56 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+      <Sheet open={openCart} onClose={() => setOpenCart(false)} title={`Your cart (${totalItems})`}>
+        {totalItems === 0 ? (
+          <p className="text-foreground text-sm">Your cart is empty</p>
+        ) : (
+          <div className="flex h-full flex-col justify-between">
+            <div className="flex flex-col gap-2 overflow-y-scroll p-3">
+              {cart.map((product) => (
+                <div
+                  key={product.id}
+                  className="group flex items-center gap-4 rounded-2xl transition-colors hover:bg-neutral-100"
+                >
+                  <Link
+                    href={`/products/${product?.id}`}
+                    className="rounded-2xl bg-neutral-100 p-2"
+                  >
+                    <img
+                      src={product.thumbnail}
+                      alt={product.title}
+                      className="size-16 rounded-2xl object-cover transition-transform group-hover:scale-105"
+                    />
+                  </Link>
+                  <div className="flex flex-col gap-1">
+                    <div className="flex flex-col">
+                      <BaseText variant="text-semibold" className="line-clamp-1 break-all">
+                        {product.title}
+                      </BaseText>
+                      <BaseText variant="small" className="text-neutral">
+                        ${product.price}
+                      </BaseText>
+                    </div>
+                    <BaseText
+                      variant="small"
+                      className="cursor-pointer text-red-600"
+                      onClick={() => removeFromCart(product.id)}
+                    >
+                      Remove from cart
+                    </BaseText>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="border-t border-neutral-200">
+              <div className="p-3">
+                <BaseButton variant="primary">Checkout</BaseButton>
+              </div>
+            </div>
+          </div>
+        )}
+      </Sheet>
     </nav>
   );
 }
