@@ -83,10 +83,10 @@ export default function Navbar() {
                     <img
                       src={product.thumbnail}
                       alt={product.title}
-                      className="size-20 rounded-2xl object-cover transition-transform group-hover:scale-110"
+                      className="size-16 rounded-2xl object-cover transition-transform group-hover:scale-110 md:size-20"
                     />
                   </Link>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-2">
                     <div className="flex flex-col">
                       <BaseText variant="text-semibold" className="line-clamp-1 break-all">
                         {product.title}
