@@ -56,7 +56,7 @@ export default function Navbar() {
           <p className="text-foreground text-sm">Your cart is empty</p>
         ) : (
           <div className="flex h-full flex-col justify-between">
-            <div className="flex flex-col gap-2 overflow-y-scroll p-3">
+            <div className="flex flex-col gap-2 overflow-y-auto p-3">
               {cart.map((product) => (
                 <div
                   key={product.id}
@@ -64,12 +64,12 @@ export default function Navbar() {
                 >
                   <Link
                     href={`/products/${product?.id}`}
-                    className="rounded-2xl bg-neutral-100 p-2"
+                    className="shrink-0 rounded-2xl bg-neutral-100 p-2"
                   >
                     <img
                       src={product.thumbnail}
                       alt={product.title}
-                      className="size-16 rounded-2xl object-cover transition-transform group-hover:scale-105"
+                      className="size-20 rounded-2xl object-cover transition-transform group-hover:scale-110"
                     />
                   </Link>
                   <div className="flex flex-col gap-1">
@@ -83,7 +83,7 @@ export default function Navbar() {
                     </div>
                     <BaseText
                       variant="small"
-                      className="cursor-pointer text-red-600"
+                      className="text-primary w-fit cursor-pointer"
                       onClick={() => removeFromCart(product.id)}
                     >
                       Remove from cart
@@ -93,8 +93,23 @@ export default function Navbar() {
               ))}
             </div>
             <div className="border-t border-neutral-200">
-              <div className="p-3">
-                <BaseButton variant="primary">Checkout</BaseButton>
+              <div className="flex flex-col gap-3 p-3">
+                <div className="flex items-center justify-between">
+                  <BaseText variant="text">Total</BaseText>
+                  <BaseText variant="text-semibold">
+                    $ {cart.reduce((total, product) => total + product.price, 0).toFixed(2)}
+                  </BaseText>
+                </div>
+                <div className="flex gap-3">
+                  <Link href="/checkout" className="grow">
+                    <BaseButton variant="primary" className="w-full">
+                      Checkout
+                    </BaseButton>
+                  </Link>
+                  <BaseButton variant="neutral" onClick={() => setOpenCart(false)}>
+                    Continue Shopping
+                  </BaseButton>
+                </div>
               </div>
             </div>
           </div>
