@@ -1,8 +1,8 @@
 export default function Loading() {
   return (
-    <div className="container pt-8 pb-4 md:pt-16">
+    <div className="container">
       <div className="flex animate-pulse">
-        <div className="border-r border-neutral-200">
+        <div className="border-r border-neutral-200 pt-3 pb-3 md:pt-8 lg:pt-16">
           <div className="sticky top-8 w-36 md:w-64">
             <div className="mr-4 flex flex-col gap-4 md:mr-8">
               <div className="h-7 shrink-0 rounded-4xl bg-gray-200 md:h-8"></div>
@@ -10,7 +10,7 @@ export default function Loading() {
             </div>
           </div>
         </div>
-        <div className="ml-4 flex flex-1 flex-col gap-4 md:ml-8">
+        <div className="ml-4 flex flex-1 flex-col gap-4 pt-3 pb-3 md:ml-8 md:pt-8 lg:pt-16">
           <div className="flex items-center justify-between">
             <div className="h-7 w-36 rounded-4xl bg-gray-200 md:h-8"></div>
           </div>
