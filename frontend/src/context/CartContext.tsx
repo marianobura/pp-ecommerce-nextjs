@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Product } from '@/types/product';
+import { getDiscountedPrice, hasValidDiscount } from '@/utils/discount';
 
 type CartContextType = {
   cart: Product[];
@@ -10,6 +11,7 @@ type CartContextType = {
   isInCart: (id: Product['id']) => boolean;
   clearCart: () => void;
   totalItems: number;
+  totalPrice: string;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -31,7 +33,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addToCart = (product: Product) => {
     setCart((prev) => {
       if (prev.find((p) => p.id === product.id)) return prev;
-      return [...prev, product];
+
+      const finalPrice = hasValidDiscount(product)
+        ? parseFloat(getDiscountedPrice(product))
+        : product.price;
+
+      const productWithFinalPrice = { ...product, price: finalPrice };
+
+      return [...prev, productWithFinalPrice];
     });
   };
 
@@ -49,9 +58,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const totalItems = cart.length;
 
+  const totalPrice = cart.reduce((total, product) => total + product.price, 0).toFixed(2);
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, isInCart, clearCart, totalItems }}
+      value={{ cart, addToCart, removeFromCart, isInCart, clearCart, totalItems, totalPrice }}
     >
       {children}
     </CartContext.Provider>

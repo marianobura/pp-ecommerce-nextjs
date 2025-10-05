@@ -10,7 +10,7 @@ import Sheet from '@/components/ui/Sheet';
 import BaseButton from '@/components/base/BaseButton';
 
 export default function Navbar() {
-  const { cart, totalItems, removeFromCart } = useCart();
+  const { cart, totalItems, removeFromCart, totalPrice } = useCart();
   const [openCart, setOpenCart] = useState(false);
 
   const handleCart = () => {
@@ -53,7 +53,21 @@ export default function Navbar() {
 
       <Sheet open={openCart} onClose={() => setOpenCart(false)} title={`Your cart (${totalItems})`}>
         {totalItems === 0 ? (
-          <p className="text-foreground text-sm">Your cart is empty</p>
+          <div className="flex h-full flex-col items-center justify-center gap-2 p-3">
+            <div className="flex items-center gap-2">
+              <Handbag size={24} />
+              <BaseText variant="text-semibold" className="text-foreground">
+                Your cart is empty
+              </BaseText>
+            </div>
+            <BaseText variant="small" className="text-foreground text-center text-balance">
+              Explore our{' '}
+              <Link href="/products" className="text-primary border-primary border-b">
+                products
+              </Link>{' '}
+              and discover great deals!
+            </BaseText>
+          </div>
         ) : (
           <div className="flex h-full flex-col justify-between">
             <div className="flex flex-col gap-2 overflow-y-auto p-3">
@@ -96,9 +110,7 @@ export default function Navbar() {
               <div className="flex flex-col gap-3 p-3">
                 <div className="flex items-center justify-between">
                   <BaseText variant="text">Total</BaseText>
-                  <BaseText variant="text-semibold">
-                    $ {cart.reduce((total, product) => total + product.price, 0).toFixed(2)}
-                  </BaseText>
+                  <BaseText variant="text-semibold">$ {totalPrice}</BaseText>
                 </div>
                 <div className="flex gap-3">
                   <Link href="/checkout" className="grow">
