@@ -6,7 +6,7 @@ export default function HomeHeader() {
   return (
     <main className="border-b border-neutral-200">
       <div className="container">
-        <div className="my-3 flex gap-4 md:my-8 lg:my-16">
+        <div className="flex gap-4 py-3 md:py-8 lg:py-16">
           <div className="flex flex-col gap-4 md:basis-3/5">
             <div className="rounded-5xl bg-secondary/20 flex grow-1 items-center p-6 md:p-12">
               <BaseText

@@ -39,7 +39,7 @@ export default function HomeTrendy() {
   ];
 
   return (
-    <section className="container my-3 md:my-8 lg:my-16">
+    <section className="container py-3 md:py-8 lg:py-16">
       <BaseText variant="h2" className="mb-3 text-center uppercase md:mb-6">
         Our trendy products
       </BaseText>

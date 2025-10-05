@@ -33,9 +33,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <body
-        className={`${poppins.variable} ${merriweather.variable} ${roboto.variable} min-h-screen`}
+        className={`${poppins.variable} ${merriweather.variable} ${roboto.variable} h-full min-h-screen`}
         cz-shortcut-listen="true"
       >
         <CartProvider>{children}</CartProvider>
