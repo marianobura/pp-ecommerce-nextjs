@@ -11,6 +11,7 @@ export default function BaseInput({
   placeholder,
   className = '',
   password,
+  required,
   ...rest
 }: {
   label?: string;
@@ -19,6 +20,7 @@ export default function BaseInput({
   placeholder?: string;
   className?: string;
   password?: boolean;
+  required?: boolean;
   [key: string]: any;
 }) {
   const [inputType, setInputType] = useState(type);
@@ -30,8 +32,13 @@ export default function BaseInput({
   return (
     <div className={`flex flex-col gap-0.5 ${className}`}>
       {label && (
-        <label htmlFor={id}>
+        <label htmlFor={id} className={required ? 'flex gap-1' : ''}>
           <BaseText variant="text-semibold">{label}</BaseText>
+          {required && (
+            <BaseText variant="text-semibold" className="text-primary">
+              *
+            </BaseText>
+          )}
         </label>
       )}
       <div
