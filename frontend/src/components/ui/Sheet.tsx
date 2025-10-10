@@ -29,20 +29,22 @@ export default function Sheet({ open, onClose, children, title }: SheetProps) {
         onClick={onClose}
       />
       <div
-        className={`fixed top-0 right-0 z-20 flex h-dvh w-96 max-w-full flex-col bg-white transition-transform ${
+        className={`fixed top-0 right-0 z-20 h-dvh w-96 max-w-full p-3 transition-transform ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex items-center justify-between border-b border-neutral-200 p-3">
-          <BaseText variant="h3">{title}</BaseText>
-          <button
-            className="flex size-12 cursor-pointer items-center justify-center rounded-4xl transition-colors hover:bg-neutral-100"
-            onClick={onClose}
-          >
-            <X size={20} />
-          </button>
+        <div className="flex h-full flex-col rounded-4xl bg-white">
+          <div className="flex items-center justify-between border-b border-neutral-200 p-3">
+            <BaseText variant="h3">{title}</BaseText>
+            <button
+              className="flex size-12 cursor-pointer items-center justify-center rounded-4xl transition-colors hover:bg-neutral-100"
+              onClick={onClose}
+            >
+              <X size={20} />
+            </button>
+          </div>
+          <div className="flex-1 overflow-y-auto">{children}</div>
         </div>
-        <div className="flex-1 overflow-y-auto">{children}</div>
       </div>
     </>
   );
