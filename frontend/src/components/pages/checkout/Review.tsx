@@ -9,20 +9,24 @@ export default function CheckoutReviewPage() {
   const { cart, totalPrice, removeFromCart } = useCart();
 
   return (
-    <>
-      <BaseText variant="h3" className="mt-2 mb-2 h-8 md:mt-4 md:mb-4 lg:mt-8">
+    <div className="flex h-full flex-col md:max-h-full">
+      <BaseText variant="h3" className="mb-2 md:mb-4">
         Review your cart
       </BaseText>
-      <div className="flex flex-col">
-        <CartItems cart={cart} removeFromCart={removeFromCart} className="max-h-96 w-full pb-3" />
-        <div className="mt-3 flex justify-between border-t border-neutral-200 pt-3 md:mt-0">
-          <BaseText variant="text-semibold">Total:</BaseText>
-          <BaseText variant="text-semibold">${totalPrice}</BaseText>
+      <div className="flex flex-col md:flex-1 md:overflow-hidden">
+        <div className="flex-1 pb-3 md:overflow-y-auto">
+          <CartItems cart={cart} removeFromCart={removeFromCart} />
         </div>
-        <BaseButton variant="primary" className="mt-4 w-full">
+      </div>
+      <div className="flex flex-col">
+        <div className="flex justify-between border-t border-neutral-200 pt-3">
+          <BaseText variant="text">Total</BaseText>
+          <BaseText variant="text-semibold">$ {totalPrice}</BaseText>
+        </div>
+        <BaseButton variant="primary" className="mt-2 w-full md:mt-4">
           Complete Purchase
         </BaseButton>
       </div>
-    </>
+    </div>
   );
 }
