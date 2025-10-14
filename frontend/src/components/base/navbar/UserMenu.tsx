@@ -3,7 +3,9 @@
 import { useEffect, useRef } from 'react';
 import BaseText from '@/components/base/BaseText';
 import clsx from 'clsx';
-import { LogOut, Settings, User } from 'lucide-react';
+import { LogOut, Settings, User, UserCheck } from 'lucide-react';
+import { useUser } from '@/context/UserContext';
+import { useRouter } from 'next/navigation';
 
 export default function UserMenu({
   openUser,
@@ -15,6 +17,14 @@ export default function UserMenu({
   triggerRef: React.RefObject<HTMLDivElement>;
 }) {
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const { isAuthenticated, user, logout } = useUser();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    setOpenUser(false);
+    router.push('/');
+  };
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -47,49 +57,78 @@ export default function UserMenu({
           : 'pointer-events-none scale-95 opacity-0',
       )}
     >
-      <div className="flex flex-col border-b border-neutral-200 p-3">
-        <BaseText variant="text-semibold" className="line-clamp-1 break-all">
-          Mariano Buranits
-        </BaseText>
-        <BaseText variant="small" className="text-foreground/60">
-          marianoobura@gmail.com
-        </BaseText>
-      </div>
-      <div className="flex flex-col gap-1.5 p-3">
-        <div
-          className="text-foreground group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0 hover:bg-neutral-100"
-          onClick={() => console.log('Switching to profile view')}
-        >
-          <div className="rounded-xl bg-neutral-100 p-2.5">
-            <User size={20} />
+      {isAuthenticated ? (
+        <>
+          <div className="flex flex-col border-b border-neutral-200 p-3">
+            <BaseText variant="text-semibold" className="line-clamp-1 break-all">
+              {user?.fullName}
+            </BaseText>
+            <BaseText variant="small" className="text-foreground/60">
+              {user?.email}
+            </BaseText>
           </div>
-          <BaseText variant="small" className="font-semibold">
-            Profile
-          </BaseText>
-        </div>
-        <div
-          className="text-foreground group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0 hover:bg-neutral-100"
-          onClick={() => console.log('Switching to settings view')}
-        >
-          <div className="rounded-xl bg-neutral-100 p-2.5">
-            <Settings size={20} />
+          <div className="flex flex-col gap-1.5 p-3">
+            <div
+              className="text-foreground group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0 hover:bg-neutral-100"
+              onClick={() => console.log('Switching to profile view')}
+            >
+              <div className="rounded-xl bg-neutral-100 p-2.5">
+                <User size={20} />
+              </div>
+              <BaseText variant="small" className="font-semibold">
+                Profile
+              </BaseText>
+            </div>
+            <div
+              className="text-foreground group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0 hover:bg-neutral-100"
+              onClick={() => console.log('Switching to settings view')}
+            >
+              <div className="rounded-xl bg-neutral-100 p-2.5">
+                <Settings size={20} />
+              </div>
+              <BaseText variant="small" className="font-semibold">
+                Settings
+              </BaseText>
+            </div>
+            <div
+              className="text-primary hover:bg-primary/10 group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0"
+              onClick={handleLogout}
+            >
+              <div className="bg-primary/10 rounded-xl p-2.5 transition-colors group-hover:bg-transparent">
+                <LogOut size={20} />
+              </div>
+              <BaseText variant="small" className="font-semibold">
+                Logout
+              </BaseText>
+            </div>
           </div>
-          <BaseText variant="small" className="font-semibold">
-            Settings
-          </BaseText>
-        </div>
-        <div
-          className="text-primary hover:bg-primary/10 group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0"
-          onClick={() => console.log('Logging out')}
-        >
-          <div className="bg-primary/10 rounded-xl p-2.5 transition-colors group-hover:bg-transparent">
-            <LogOut size={20} />
+        </>
+      ) : (
+        <div className="flex flex-col gap-1.5 p-3">
+          <div
+            className="text-foreground group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0 hover:bg-neutral-100"
+            onClick={() => router.push('/auth/login')}
+          >
+            <div className="rounded-xl bg-neutral-100 p-2.5">
+              <User size={20} />
+            </div>
+            <BaseText variant="small" className="font-semibold">
+              Sign in
+            </BaseText>
           </div>
-          <BaseText variant="small" className="font-semibold">
-            Logout
-          </BaseText>
+          <div
+            className="text-foreground group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0 hover:bg-neutral-100"
+            onClick={() => router.push('/auth/register')}
+          >
+            <div className="rounded-xl bg-neutral-100 p-2.5">
+              <UserCheck size={20} />
+            </div>
+            <BaseText variant="small" className="font-semibold">
+              Create an account
+            </BaseText>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

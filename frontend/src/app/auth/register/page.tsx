@@ -6,17 +6,49 @@ import BaseText from '@/components/base/BaseText';
 import Logo from '@/components/icons/Logo';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useUser } from '@/context/UserContext';
+import { CircleAlert } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const { register, error, clearError, loading } = useUser();
+  const [firstName, setFirstName] = useState<string | null>(null);
+  const [lastName, setLastName] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
+  const [confirmPassword, setConfirmPassword] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const router = useRouter();
 
-  const submitHandler = (e: { preventDefault: () => void }) => {
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ name, email, password, confirmPassword });
+    clearError();
+    setErrorMessage(null);
+
+    if (password !== confirmPassword) {
+      setErrorMessage('Passwords do not match');
+      return;
+    }
+
+    if (!firstName || !lastName || !email || !password) {
+      setErrorMessage('Please fill in all fields');
+      return;
+    }
+
+    try {
+      await register({ firstName, lastName, email, password });
+      router.push('/');
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred');
+    }
   };
+
+  const handleInputChange =
+    (setter: (v: string) => void) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setter(e.target.value);
+      if (error) clearError();
+      if (errorMessage) setErrorMessage(null);
+    };
 
   return (
     <>
@@ -33,16 +65,29 @@ export default function RegisterPage() {
           .
         </BaseText>
       </div>
+
       <form onSubmit={submitHandler}>
-        <BaseInput
-          label="Name"
-          type="text"
-          placeholder="Enter your full name"
-          className="mb-4 px-6"
-          id="name"
-          autoComplete="name"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-        />
+        <div className="flex gap-4 px-6">
+          <BaseInput
+            label="First Name"
+            type="text"
+            placeholder="Enter your first name"
+            className="mb-4 flex-1"
+            id="first-name"
+            autoComplete="given-name"
+            onChange={handleInputChange(setFirstName)}
+          />
+          <BaseInput
+            label="Last Name"
+            type="text"
+            placeholder="Enter your last name"
+            className="mb-4 flex-1"
+            id="last-name"
+            autoComplete="family-name"
+            onChange={handleInputChange(setLastName)}
+          />
+        </div>
+
         <BaseInput
           label="Email"
           type="email"
@@ -50,8 +95,9 @@ export default function RegisterPage() {
           className="mb-4 px-6"
           id="email"
           autoComplete="email"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+          onChange={handleInputChange(setEmail)}
         />
+
         <BaseInput
           label="Password"
           type="password"
@@ -59,21 +105,29 @@ export default function RegisterPage() {
           className="mb-4 px-6"
           id="password"
           autoComplete="new-password"
-          password
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+          onChange={handleInputChange(setPassword)}
         />
+
         <BaseInput
           label="Confirm password"
           type="password"
           placeholder="Confirm your password"
           className="mb-4 px-6"
           id="confirm-password"
-          password
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
+          onChange={handleInputChange(setConfirmPassword)}
         />
-        <div className="px-6">
-          <BaseButton type="submit" variant="primary" className="w-full">
-            Create account
+
+        <div className="flex flex-col gap-2 px-6">
+          {(errorMessage || error) && (
+            <div className="flex gap-1">
+              <CircleAlert size={16} className="text-primary" />
+              <BaseText variant="small" className="text-primary">
+                {errorMessage || error}
+              </BaseText>
+            </div>
+          )}
+          <BaseButton type="submit" variant="primary" className="w-full" disabled={loading}>
+            {loading ? 'Creating account...' : 'Create account'}
           </BaseButton>
         </div>
       </form>

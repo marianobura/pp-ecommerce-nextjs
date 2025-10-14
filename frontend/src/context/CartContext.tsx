@@ -1,15 +1,16 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, ReactNode } from 'react';
 import { Product } from '@/types/product';
 import { getDiscountedPrice, hasValidDiscount } from '@/utils/discount';
+import { useUser } from './UserContext';
 
 type CartContextType = {
   cart: Product[];
   addToCart: (product: Product) => void;
   removeFromCart: (id: Product['id']) => void;
-  isInCart: (id: Product['id']) => boolean;
   clearCart: () => void;
+  isInCart: (id: Product['id']) => boolean;
   totalItems: number;
   totalPrice: string;
 };
@@ -17,52 +18,52 @@ type CartContextType = {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<Product[]>([]);
+  const { user, setUser } = useUser();
 
-  useEffect(() => {
-    const storedCart = localStorage.getItem('cart');
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
+  const cart = user?.cart || [];
+
+  const updateCart = (newCart: Product[]) => {
+    if (!user) return;
+
+    const updatedUser = { ...user, cart: newCart };
+    setUser(updatedUser);
+
+    const storedAuthRaw = localStorage.getItem('auth');
+    if (storedAuthRaw) {
+      const storedAuth = JSON.parse(storedAuthRaw);
+      storedAuth.user.cart = newCart;
+      localStorage.setItem('auth', JSON.stringify(storedAuth));
     }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+  };
 
   const addToCart = (product: Product) => {
-    setCart((prev) => {
-      if (prev.find((p) => p.id === product.id)) return prev;
+    if (!user) return;
 
-      const finalPrice = hasValidDiscount(product)
-        ? parseFloat(getDiscountedPrice(product))
-        : product.price;
+    if (cart.find((p) => p.id === product.id)) return;
 
-      const productWithFinalPrice = { ...product, price: finalPrice };
+    const finalPrice = hasValidDiscount(product)
+      ? parseFloat(getDiscountedPrice(product))
+      : product.price;
 
-      return [...prev, productWithFinalPrice];
-    });
+    const productWithFinalPrice = { ...product, price: finalPrice };
+
+    updateCart([...cart, productWithFinalPrice]);
   };
 
   const removeFromCart = (id: Product['id']) => {
-    setCart((prev) => prev.filter((product) => product.id !== id));
+    updateCart(cart.filter((p) => p.id !== id));
   };
 
-  const clearCart = () => {
-    setCart([]);
-  };
+  const clearCart = () => updateCart([]);
 
-  const isInCart = (id: Product['id']) => {
-    return cart.some((product) => product.id === id);
-  };
+  const isInCart = (id: Product['id']) => cart.some((p) => p.id === id);
 
   const totalItems = cart.length;
-
-  const totalPrice = cart.reduce((total, product) => total + product.price, 0).toFixed(2);
+  const totalPrice = cart.reduce((total, p) => total + p.price, 0).toFixed(2);
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, isInCart, clearCart, totalItems, totalPrice }}
+      value={{ cart, addToCart, removeFromCart, clearCart, isInCart, totalItems, totalPrice }}
     >
       {children}
     </CartContext.Provider>
@@ -71,8 +72,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
 export function useCart() {
   const context = useContext(CartContext);
-  if (!context) {
-    throw new Error('useCart must be used within a CartProvider');
-  }
+  if (!context) throw new Error('useCart must be used within a CartProvider');
   return context;
 }
