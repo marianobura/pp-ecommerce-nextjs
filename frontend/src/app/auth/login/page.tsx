@@ -6,15 +6,38 @@ import BaseText from '@/components/base/BaseText';
 import Logo from '@/components/icons/Logo';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useUser } from '@/context/UserContext';
+import { CircleAlert } from 'lucide-react';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { login, error, clearError, loading } = useUser();
+  const [email, setEmail] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const submitHandler = (e: { preventDefault: () => void }) => {
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ email, password });
+    clearError();
+    setErrorMessage(null);
+
+    if (!email || !password) {
+      setErrorMessage('Please fill in all fields');
+      return;
+    }
+
+    try {
+      await login(email, password);
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred');
+    }
   };
+
+  const handleInputChange =
+    (setter: (v: string) => void) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setter(e.target.value);
+      if (error) clearError();
+      if (errorMessage) setErrorMessage(null);
+    };
 
   return (
     <>
@@ -39,7 +62,7 @@ export default function LoginPage() {
           className="mb-4 px-6"
           id="email"
           autoComplete="email"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+          onChange={handleInputChange(setEmail)}
         />
         <BaseInput
           label="Password"
@@ -48,12 +71,20 @@ export default function LoginPage() {
           className="mb-4 px-6"
           id="password"
           autoComplete="current-password"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+          onChange={handleInputChange(setPassword)}
           password
         />
-        <div className="px-6">
-          <BaseButton type="submit" variant="primary" className="w-full">
-            Sign in
+        <div className="flex flex-col gap-2 px-6">
+          {(errorMessage || error) && (
+            <div className="flex gap-1">
+              <CircleAlert size={16} className="text-primary" />
+              <BaseText variant="small" className="text-primary">
+                {errorMessage || error}
+              </BaseText>
+            </div>
+          )}
+          <BaseButton type="submit" variant="primary" className="w-full" disabled={loading}>
+            {loading ? 'Signing in...' : 'Sign in'}
           </BaseButton>
         </div>
       </form>

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User } from '@/types/user';
+import { useRouter } from 'next/navigation';
 
 type StoredAuth = {
   token: string;
@@ -32,6 +33,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const isAuthenticated = !!user && !!token;
 
@@ -39,19 +41,24 @@ export function UserProvider({ children }: { children: ReactNode }) {
     try {
       setLoading(true);
       setError(null);
+      console.log('Attempting login with', email, password);
 
       const storedAuthRaw = localStorage.getItem('auth');
       if (!storedAuthRaw) throw new Error('No user found');
 
       const storedAuth: StoredAuth = JSON.parse(storedAuthRaw);
       const storedUser = storedAuth.user;
+      console.log(storedUser);
 
       if (!storedUser.password || storedUser.email !== email || storedUser.password !== password) {
         throw new Error('Invalid credentials');
       }
+      console.log('Login successful');
 
       setUser(storedUser);
       setToken(storedAuth.token);
+
+      router.push('/');
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -85,6 +92,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
       setUser(newUser);
       setToken(fakeToken);
+
+      router.push('/');
     } catch (err: any) {
       setError(err.message);
     } finally {

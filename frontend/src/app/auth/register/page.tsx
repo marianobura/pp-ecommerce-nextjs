@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useUser } from '@/context/UserContext';
 import { CircleAlert } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {
   const { register, error, clearError, loading } = useUser();
@@ -18,7 +17,6 @@ export default function RegisterPage() {
   const [password, setPassword] = useState<string | null>(null);
   const [confirmPassword, setConfirmPassword] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const router = useRouter();
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +35,6 @@ export default function RegisterPage() {
 
     try {
       await register({ firstName, lastName, email, password });
-      router.push('/');
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred');
     }
