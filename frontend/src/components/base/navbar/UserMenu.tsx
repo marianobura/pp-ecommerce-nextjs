@@ -70,7 +70,7 @@ export default function UserMenu({
           <div className="flex flex-col gap-1.5 p-3">
             <div
               className="text-foreground group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0 hover:bg-neutral-100"
-              onClick={() => console.log('Switching to profile view')}
+              onClick={() => router.push('/profile')}
             >
               <div className="rounded-xl bg-neutral-100 p-2.5">
                 <User size={20} />
@@ -81,7 +81,7 @@ export default function UserMenu({
             </div>
             <div
               className="text-foreground group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0 hover:bg-neutral-100"
-              onClick={() => console.log('Switching to settings view')}
+              onClick={() => router.push('/profile/settings')}
             >
               <div className="rounded-xl bg-neutral-100 p-2.5">
                 <Settings size={20} />
