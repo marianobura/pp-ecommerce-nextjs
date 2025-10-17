@@ -3,7 +3,7 @@
 import BaseText from '@/components/base/BaseText';
 import { useCart } from '@/context/CartContext';
 import BaseButton from '@/components/base/BaseButton';
-import CartItems from '@/components/ui/CartItems';
+import CartItems from '@/components/layout/CartItems';
 
 export default function CheckoutReviewPage() {
   const { cart, totalPrice, removeFromCart } = useCart();

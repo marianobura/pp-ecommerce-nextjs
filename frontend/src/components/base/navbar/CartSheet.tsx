@@ -4,7 +4,7 @@ import BaseText from '@/components/base/BaseText';
 import Link from 'next/link';
 import BaseButton from '@/components/base/BaseButton';
 import { useCart } from '@/context/CartContext';
-import CartItems from '@/components/ui/CartItems';
+import CartItems from '@/components/layout/CartItems';
 
 export default function CartSheet({
   openCart,
