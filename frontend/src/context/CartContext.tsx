@@ -1,8 +1,13 @@
 'use client';
 
-import { createContext, useContext, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Product } from '@/types/product';
-import { getDiscountedPrice, hasValidDiscount } from '@/utils/discount';
+import {
+  getCart,
+  addProductToCart,
+  removeProductFromCart,
+  clearCartService,
+} from '@/services/cart';
 import { useUser } from './UserContext';
 
 type CartContextType = {
@@ -19,47 +24,45 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const { user, setUser } = useUser();
+  const [cart, setCart] = useState<Product[]>([]);
 
-  const cart = user?.cart || [];
-
-  const updateCart = (newCart: Product[]) => {
-    if (!user) return;
-
-    const updatedUser = { ...user, cart: newCart };
-    setUser(updatedUser);
-
-    const storedAuthRaw = localStorage.getItem('auth');
-    if (storedAuthRaw) {
-      const storedAuth = JSON.parse(storedAuthRaw);
-      storedAuth.user.cart = newCart;
-      localStorage.setItem('auth', JSON.stringify(storedAuth));
+  useEffect(() => {
+    if (user) {
+      setCart(getCart());
+    } else {
+      setCart([]);
     }
+  }, [user]);
+
+  const syncUserCart = (newCart: Product[]) => {
+    if (!user) return;
+    setUser({ ...user, cart: newCart });
   };
 
   const addToCart = (product: Product) => {
     if (!user) return;
-
-    if (cart.find((p) => p.id === product.id)) return;
-
-    const finalPrice = hasValidDiscount(product)
-      ? parseFloat(getDiscountedPrice(product))
-      : product.price;
-
-    const productWithFinalPrice = { ...product, price: finalPrice };
-
-    updateCart([...cart, productWithFinalPrice]);
+    const updatedCart = addProductToCart(product);
+    setCart(updatedCart);
+    syncUserCart(updatedCart);
   };
 
   const removeFromCart = (id: Product['id']) => {
-    updateCart(cart.filter((p) => p.id !== id));
+    if (!user) return;
+    const updatedCart = removeProductFromCart(id);
+    setCart(updatedCart);
+    syncUserCart(updatedCart);
   };
 
-  const clearCart = () => updateCart([]);
+  const clearCart = () => {
+    if (!user) return;
+    clearCartService();
+    setCart([]);
+    syncUserCart([]);
+  };
 
   const isInCart = (id: Product['id']) => cart.some((p) => p.id === id);
-
   const totalItems = cart.length;
-  const totalPrice = cart.reduce((total, p) => total + p.price, 0).toFixed(2);
+  const totalPrice = cart.reduce((acc, p) => acc + p.price, 0).toFixed(2);
 
   return (
     <CartContext.Provider

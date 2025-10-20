@@ -3,11 +3,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User } from '@/types/user';
 import { useRouter } from 'next/navigation';
-
-type StoredAuth = {
-  token: string;
-  user: User;
-};
+import { loginUser, registerUser, logoutUser, getStoredAuthData } from '@/services/user';
 
 type RegisterData = Pick<User, 'email' | 'password' | 'firstName' | 'lastName'> & {
   phone?: string;
@@ -22,7 +18,7 @@ type UserContextType = {
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (userData: RegisterData) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   clearError: () => void;
 };
 
@@ -41,23 +37,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
     try {
       setLoading(true);
       setError(null);
-      console.log('Attempting login with', email, password);
-
-      const storedAuthRaw = localStorage.getItem('auth');
-      if (!storedAuthRaw) throw new Error('No user found');
-
-      const storedAuth: StoredAuth = JSON.parse(storedAuthRaw);
-      const storedUser = storedAuth.user;
-      console.log(storedUser);
-
-      if (!storedUser.password || storedUser.email !== email || storedUser.password !== password) {
-        throw new Error('Invalid credentials');
-      }
-      console.log('Login successful');
-
-      setUser(storedUser);
-      setToken(storedAuth.token);
-
+      const { user, token } = await loginUser(email, password);
+      setUser(user);
+      setToken(token);
       router.push('/');
     } catch (err: any) {
       setError(err.message);
@@ -70,29 +52,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
     try {
       setLoading(true);
       setError(null);
-
-      const newUser: User = {
-        id: crypto.randomUUID(),
-        email: userData.email,
-        password: userData.password,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        fullName: `${userData.firstName} ${userData.lastName}`,
-        phone: null,
-        address: null,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        cart: [],
-        orders: [],
-      };
-
-      const fakeToken = crypto.randomUUID();
-      const authData = { token: fakeToken, user: newUser };
-      localStorage.setItem('auth', JSON.stringify(authData));
-
-      setUser(newUser);
-      setToken(fakeToken);
-
+      const { user, token } = await registerUser(userData);
+      setUser(user);
+      setToken(token);
       router.push('/');
     } catch (err: any) {
       setError(err.message);
@@ -101,22 +63,23 @@ export function UserProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await logoutUser();
     setUser(null);
     setToken(null);
-    localStorage.removeItem('auth');
   };
 
   const clearError = () => setError(null);
 
   useEffect(() => {
-    const storedAuth = localStorage.getItem('auth');
-    if (storedAuth) {
-      const { user, token }: StoredAuth = JSON.parse(storedAuth);
-      setUser(user);
-      setToken(token);
-    }
-    setLoading(false);
+    (async () => {
+      const storedAuth = await getStoredAuthData();
+      if (storedAuth) {
+        setUser(storedAuth.user);
+        setToken(storedAuth.token);
+      }
+      setLoading(false);
+    })();
   }, []);
 
   const value: UserContextType = {
