@@ -13,8 +13,8 @@ export default function CheckoutReviewPage() {
       <BaseText variant="h3" className="mb-2 md:mb-4">
         Review your cart
       </BaseText>
-      <div className="flex flex-col md:flex-1 md:overflow-hidden">
-        <div className="flex-1 pb-3 md:overflow-y-auto md:pr-3">
+      <div className="flex flex-col md:overflow-hidden">
+        <div className="pb-3 md:overflow-y-auto md:pr-3">
           <CartItems cart={cart} removeFromCart={removeFromCart} />
         </div>
       </div>
