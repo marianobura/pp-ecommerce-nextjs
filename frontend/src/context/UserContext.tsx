@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User } from '@/types/user';
 import { useRouter } from 'next/navigation';
-import { loginUser, registerUser, logoutUser, getStoredAuthData } from '@/services/user';
+import { loginUser, registerUser, logoutUser, getStoredAuthData } from '@/services/auth';
 
 type RegisterData = Pick<User, 'email' | 'password' | 'firstName' | 'lastName'> & {
   phone?: string;
