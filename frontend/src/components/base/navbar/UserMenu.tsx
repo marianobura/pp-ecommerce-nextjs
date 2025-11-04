@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { LogOut, User, UserCheck } from 'lucide-react';
 import { useUser } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
-import { menuItems } from '@/config/profile';
+import { PROFILE_MENU_ITEMS as menu } from '@/config/navigation';
 
 export default function UserMenu({
   openUser,
@@ -20,7 +20,6 @@ export default function UserMenu({
   const menuRef = useRef<HTMLDivElement | null>(null);
   const { isAuthenticated, user, logout } = useUser();
   const router = useRouter();
-  const menu = menuItems();
 
   const handleLogout = () => {
     logout();
