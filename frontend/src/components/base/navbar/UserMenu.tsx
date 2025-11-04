@@ -3,9 +3,10 @@
 import { useEffect, useRef } from 'react';
 import BaseText from '@/components/base/BaseText';
 import clsx from 'clsx';
-import { LogOut, Settings, User, UserCheck } from 'lucide-react';
+import { LogOut, User, UserCheck } from 'lucide-react';
 import { useUser } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
+import { menuItems } from '@/config/profile';
 
 export default function UserMenu({
   openUser,
@@ -19,6 +20,7 @@ export default function UserMenu({
   const menuRef = useRef<HTMLDivElement | null>(null);
   const { isAuthenticated, user, logout } = useUser();
   const router = useRouter();
+  const menu = menuItems();
 
   const handleLogout = () => {
     logout();
@@ -68,28 +70,24 @@ export default function UserMenu({
             </BaseText>
           </div>
           <div className="flex flex-col gap-1.5 p-3">
-            <div
-              className="text-foreground group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0 hover:bg-neutral-100"
-              onClick={() => router.push('/profile')}
-            >
-              <div className="rounded-xl bg-neutral-100 p-2.5">
-                <User size={20} />
+            {menu.map((item, index) => (
+              <div
+                className="text-foreground group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0 hover:bg-neutral-100"
+                key={index}
+                onClick={() => {
+                  router.push(item.redirect);
+                  setOpenUser(false);
+                }}
+              >
+                <div className="rounded-xl bg-neutral-100 p-2.5">
+                  <item.icon size={20} />
+                </div>
+                <BaseText variant="small" className="font-semibold">
+                  {item.label}
+                </BaseText>
               </div>
-              <BaseText variant="small" className="font-semibold">
-                Profile
-              </BaseText>
-            </div>
-            <div
-              className="text-foreground group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0 hover:bg-neutral-100"
-              onClick={() => router.push('/profile/settings')}
-            >
-              <div className="rounded-xl bg-neutral-100 p-2.5">
-                <Settings size={20} />
-              </div>
-              <BaseText variant="small" className="font-semibold">
-                Settings
-              </BaseText>
-            </div>
+            ))}
+
             <div
               className="text-primary hover:bg-primary/10 group flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl transition-all hover:gap-0"
               onClick={handleLogout}
