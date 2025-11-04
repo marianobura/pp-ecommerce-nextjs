@@ -1,3 +1,5 @@
+import ProfileSection from '@/components/layout/Profile';
+
 export default function OrdersPage() {
-  return <div>Orders Page - Under Construction</div>;
+  return <ProfileSection title="My Orders">asd</ProfileSection>;
 }

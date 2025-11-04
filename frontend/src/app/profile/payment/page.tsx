@@ -1,3 +1,5 @@
+import ProfileSection from '@/components/layout/Profile';
+
 export default function PaymentPage() {
-  return <div>Payment Page - Under Construction</div>;
+  return <ProfileSection title="Payment">asd</ProfileSection>;
 }

@@ -1,3 +1,5 @@
+import ProfileSection from '@/components/layout/Profile';
+
 export default function ChangePasswordPage() {
-  return <div>Change Password Page - Under Construction</div>;
+  return <ProfileSection title="Change Password">asd</ProfileSection>;
 }
