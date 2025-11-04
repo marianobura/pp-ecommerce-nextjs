@@ -4,13 +4,12 @@ import BaseText from '@/components/base/BaseText';
 import Navbar from '@/components/layout/Navbar';
 import { useUser } from '@/context/UserContext';
 import { useRouter, usePathname } from 'next/navigation';
-import { menuItems } from '@/config/profile';
+import { PROFILE_MENU_ITEMS as menu } from '@/config/navigation';
 
 export default function ProfileLayout({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
   const router = useRouter();
   const pathname = usePathname();
-  const menu = menuItems();
 
   return (
     <>
