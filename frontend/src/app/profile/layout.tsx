@@ -5,11 +5,14 @@ import Navbar from '@/components/layout/Navbar';
 import { useUser } from '@/context/UserContext';
 import { useRouter, usePathname } from 'next/navigation';
 import { PROFILE_MENU_ITEMS as menu } from '@/config/navigation';
+import { LoaderCircle } from 'lucide-react';
+import BaseButton from '@/components/base/BaseButton';
 
 export default function ProfileLayout({ children }: { children: React.ReactNode }) {
-  const { user } = useUser();
+  const { user, loading } = useUser();
   const router = useRouter();
   const pathname = usePathname();
+  const title = menu.find((item) => item.redirect === pathname)?.label || 'Profile';
 
   return (
     <>
@@ -20,14 +23,18 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
           <div className="flex flex-col gap-4">
             <div className="flex flex-col">
               <BaseText variant="text">Hello, nice to see you</BaseText>
-              <BaseText variant="h3">{user?.firstName}!</BaseText>
+              {loading ? (
+                <div className="h-7 w-32 animate-pulse rounded-4xl bg-gray-200"></div>
+              ) : (
+                <BaseText variant="h3">{user?.firstName}!</BaseText>
+              )}
             </div>
             <div className="divide-muted flex flex-col gap-2">
               {menu.map((item, index) => (
                 <div
                   className={`flex cursor-pointer items-center gap-2 rounded-4xl border p-4 transition-colors ${
                     pathname === item.redirect
-                      ? 'bg-primary border-transparent text-white'
+                      ? 'bg-primary/10 text-primary border-transparent'
                       : 'border-neutral-200 hover:bg-neutral-100'
                   }`}
                   key={index}
@@ -41,13 +48,22 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
           </div>
           <div className="h-full flex-1 rounded-4xl border border-neutral-200">
             <div className="border-b border-neutral-200 p-6">
-              <BaseText variant="h2">
-                {menu.filter((item) => pathname === item.redirect)[0]?.label
-                  ? menu.filter((item) => pathname === item.redirect)[0]?.label
-                  : pathname}
-              </BaseText>
+              <div className="flex items-center justify-between gap-4">
+                <BaseText variant="h2">{title}</BaseText>
+                <BaseButton variant="primary" onClick={() => alert('User information updated')}>
+                  Update
+                </BaseButton>
+              </div>
             </div>
-            <div className="p-6">{children}</div>
+            <div className="p-6">
+              {loading ? (
+                <div className="flex min-h-72 w-full items-center justify-center">
+                  <LoaderCircle size={32} className="text-primary animate-spin" />
+                </div>
+              ) : (
+                children
+              )}
+            </div>
           </div>
         </div>
       </main>

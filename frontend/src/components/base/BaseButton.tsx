@@ -8,6 +8,7 @@ type BaseButtonProps = {
   tag?: 'button' | 'link';
   className?: string;
   href?: string;
+  icon?: Boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function BaseButton({
@@ -16,6 +17,7 @@ export default function BaseButton({
   tag = 'button',
   className = '',
   href,
+  icon = false,
   ...props
 }: BaseButtonProps) {
   const baseStyles =
@@ -33,14 +35,18 @@ export default function BaseButton({
   if (href) {
     return (
       <Link href={href} className={classes}>
-        <BaseText variant="button-bold">{children}</BaseText>
+        <BaseText variant="button-bold" className={icon ? 'flex items-center gap-2' : ''}>
+          {children}
+        </BaseText>
       </Link>
     );
   }
 
   return (
     <button className={classes} {...props}>
-      <BaseText variant="button">{children}</BaseText>
+      <BaseText variant="button" className={icon ? 'flex items-center gap-2' : ''}>
+        {children}
+      </BaseText>
     </button>
   );
 }

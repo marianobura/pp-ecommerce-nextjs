@@ -42,12 +42,18 @@ export default function BaseInput({
         </label>
       )}
       <div
-        className={`focus-within:border-primary focus-within:ring-primary h-12 overflow-hidden rounded-4xl border border-neutral-200 transition focus-within:ring-1 ${password ? 'flex' : ''}`}
+        className={`group h-12 overflow-hidden rounded-4xl border transition ${
+          password ? 'flex' : ''
+        } ${
+          rest.readOnly || rest.disabled
+            ? 'cursor-not-allowed border-neutral-100 bg-neutral-100'
+            : 'focus-within:border-primary focus-within:ring-primary border-neutral-200 bg-white focus-within:ring-1'
+        }`}
       >
         <input
           type={inputType}
           placeholder={placeholder}
-          className="font-body size-full bg-white px-4 py-3 text-sm text-neutral-900 outline-none placeholder:text-neutral-400"
+          className="font-body size-full bg-transparent px-4 py-3 text-sm text-neutral-900 outline-none placeholder:text-neutral-400 read-only:cursor-not-allowed disabled:cursor-not-allowed"
           id={id}
           {...rest}
         />
