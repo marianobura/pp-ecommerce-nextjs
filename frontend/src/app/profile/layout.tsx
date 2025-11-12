@@ -4,15 +4,21 @@ import BaseText from '@/components/base/BaseText';
 import Navbar from '@/components/layout/Navbar';
 import { useUser } from '@/context/UserContext';
 import { useRouter, usePathname } from 'next/navigation';
-import { PROFILE_MENU_ITEMS as menu } from '@/config/navigation';
+import { PROFILE_MENU_ITEMS as menu, PROFILE_BUTTON_DATA as button } from '@/config/navigation';
 import { LoaderCircle } from 'lucide-react';
 import BaseButton from '@/components/base/BaseButton';
+import { ProfileFormProvider, useProfileForm } from '@/context/ProfileFormContext';
 
-export default function ProfileLayout({ children }: { children: React.ReactNode }) {
+function ProfileLayoutContent({ children }: { children: React.ReactNode }) {
   const { user, loading } = useUser();
+  const { submit: submitForm, isSubmitting } = useProfileForm();
   const router = useRouter();
   const pathname = usePathname();
   const title = menu.find((item) => item.redirect === pathname)?.label || 'Profile';
+
+  const currentButton = button.find((button) => pathname === button.path);
+  const showButton = !!currentButton;
+  const buttonLabel = currentButton?.label;
 
   return (
     <>
@@ -48,12 +54,16 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
           </div>
           <div className="h-full flex-1 rounded-4xl border border-neutral-200">
             <div className="border-b border-neutral-200 p-6">
-              <div className="flex items-center justify-between gap-4">
+              {showButton ? (
+                <div className="flex items-center justify-between gap-4">
+                  <BaseText variant="h2">{title}</BaseText>
+                  <BaseButton variant="primary" onClick={submitForm} isLoading={isSubmitting}>
+                    {buttonLabel}
+                  </BaseButton>
+                </div>
+              ) : (
                 <BaseText variant="h2">{title}</BaseText>
-                <BaseButton variant="primary" onClick={() => alert('User information updated')}>
-                  Update
-                </BaseButton>
-              </div>
+              )}
             </div>
             <div className="p-6">
               {loading ? (
@@ -68,5 +78,13 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
         </div>
       </main>
     </>
+  );
+}
+
+export default function ProfileLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <ProfileFormProvider>
+      <ProfileLayoutContent>{children}</ProfileLayoutContent>
+    </ProfileFormProvider>
   );
 }
