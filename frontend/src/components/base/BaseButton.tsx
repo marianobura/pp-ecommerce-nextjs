@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import BaseText from '@/components/base/BaseText';
+import { LoaderCircle } from 'lucide-react';
 
 type BaseButtonProps = {
   children: ReactNode;
@@ -8,7 +9,8 @@ type BaseButtonProps = {
   tag?: 'button' | 'link';
   className?: string;
   href?: string;
-  icon?: Boolean;
+  icon?: boolean;
+  isLoading?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function BaseButton({
@@ -18,10 +20,11 @@ export default function BaseButton({
   className = '',
   href,
   icon = false,
+  isLoading = false,
   ...props
 }: BaseButtonProps) {
   const baseStyles =
-    'rounded-4xl px-6 py-3 transition-colors text-center inline-flex items-center justify-center cursor-pointer';
+    'rounded-4xl px-6 py-3 transition-colors text-center inline-flex items-center justify-center cursor-pointer disabled:cursor-not-allowed disabled:opacity-75';
 
   const variantStyles: Record<string, string> = {
     primary: 'bg-primary hover:bg-primary/90 text-white',
@@ -43,10 +46,14 @@ export default function BaseButton({
   }
 
   return (
-    <button className={classes} {...props}>
-      <BaseText variant="button" className={icon ? 'flex items-center gap-2' : ''}>
-        {children}
-      </BaseText>
+    <button className={classes} disabled={isLoading || props.disabled} {...props}>
+      {isLoading ? (
+        <LoaderCircle size={20} className="animate-spin" />
+      ) : (
+        <BaseText variant="button" className={icon ? 'flex items-center gap-2' : ''}>
+          {children}
+        </BaseText>
+      )}
     </button>
   );
 }
