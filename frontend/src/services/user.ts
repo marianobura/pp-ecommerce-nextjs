@@ -18,7 +18,19 @@ export async function updateUserProfile(userId: string, data: Partial<User>) {
     throw new Error('User not found');
   }
 
-  const updatedUser = { ...users[userIndex], ...data, updatedAt: new Date().toISOString() };
+  const currentUser = users[userIndex];
+
+  const mergedData = {
+    ...currentUser,
+    ...data,
+  };
+
+  const updatedUser = {
+    ...mergedData,
+    fullName: `${mergedData.firstName} ${mergedData.lastName}`,
+    updatedAt: new Date().toISOString(),
+  };
+
   if (authData) {
     const auth = JSON.parse(authData);
     if (auth.user.id === userId) {
@@ -26,6 +38,7 @@ export async function updateUserProfile(userId: string, data: Partial<User>) {
       localStorage.setItem('auth', JSON.stringify(updatedAuth));
     }
   }
+
   users[userIndex] = updatedUser;
   saveStoredUsers(users);
 
