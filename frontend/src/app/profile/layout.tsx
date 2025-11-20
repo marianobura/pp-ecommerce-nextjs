@@ -35,7 +35,7 @@ function ProfileLayoutContent({ children }: { children: React.ReactNode }) {
                 <BaseText variant="h3">{user?.firstName}!</BaseText>
               )}
             </div>
-            <div className="flex gap-2 overflow-y-scroll md:flex-col">
+            <div className="flex gap-2 overflow-y-auto md:flex-col">
               {menu.map((item, index) => (
                 <div
                   className={`line-clamp-1 flex shrink-0 cursor-pointer items-center gap-2 rounded-4xl border p-4 transition-colors ${
