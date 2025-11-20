@@ -25,7 +25,7 @@ function ProfileLayoutContent({ children }: { children: React.ReactNode }) {
       <Navbar />
       <main className="container pt-3 pb-3 md:pt-8 lg:pt-16">
         <BaseText variant="h1">Profile</BaseText>
-        <div className="mt-2 flex gap-8 md:mt-4 lg:mt-8">
+        <div className="mt-2 flex flex-col gap-8 md:mt-4 md:flex-row lg:mt-8">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col">
               <BaseText variant="text">Hello, nice to see you</BaseText>
@@ -35,10 +35,10 @@ function ProfileLayoutContent({ children }: { children: React.ReactNode }) {
                 <BaseText variant="h3">{user?.firstName}!</BaseText>
               )}
             </div>
-            <div className="divide-muted flex flex-col gap-2">
+            <div className="flex gap-2 overflow-y-scroll md:flex-col">
               {menu.map((item, index) => (
                 <div
-                  className={`flex cursor-pointer items-center gap-2 rounded-4xl border p-4 transition-colors ${
+                  className={`line-clamp-1 flex shrink-0 cursor-pointer items-center gap-2 rounded-4xl border p-4 transition-colors ${
                     pathname === item.redirect
                       ? 'bg-primary/10 text-primary border-transparent'
                       : 'border-neutral-200 hover:bg-neutral-100'
@@ -55,9 +55,16 @@ function ProfileLayoutContent({ children }: { children: React.ReactNode }) {
           <div className="h-full flex-1 rounded-4xl border border-neutral-200">
             <div className="border-b border-neutral-200 p-6">
               {showButton ? (
-                <div className="flex items-center justify-between gap-4">
-                  <BaseText variant="h2">{title}</BaseText>
-                  <BaseButton variant="primary" onClick={submitForm} isLoading={isSubmitting}>
+                <div className="xs:flex-row flex flex-col items-center justify-between gap-4">
+                  <BaseText variant="h2" className="line-clamp-1 truncate break-all">
+                    {title}
+                  </BaseText>
+                  <BaseButton
+                    variant="primary"
+                    className="line-clamp-1"
+                    onClick={submitForm}
+                    isLoading={isSubmitting}
+                  >
                     {buttonLabel}
                   </BaseButton>
                 </div>
