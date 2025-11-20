@@ -1,12 +1,12 @@
 'use client';
 
 import BaseInput from '@/components/base/BaseInput';
-import BaseText from '@/components/base/BaseText';
 import { useUser } from '@/context/UserContext';
 import { updateUserProfile } from '@/services/user';
 import { useState, useEffect, useCallback } from 'react';
 import { useProfileForm } from '@/context/ProfileFormContext';
-import { getInitialAddress, getProfileFormConfig } from '@/utils/profile';
+import { getInitialAddress } from '@/utils/profile';
+import UpdateInput from '@/components/pages/profile/UpdateInput';
 
 export default function ProfilePage() {
   const { user, setUser } = useUser();
@@ -71,43 +71,59 @@ export default function ProfilePage() {
     setSubmit(handleSubmit);
   }, [handleSubmit, setSubmit]);
 
-  const profileFormConfig = getProfileFormConfig(user);
-
   return (
     <form className="flex flex-col divide-y divide-neutral-200" onSubmit={handleSubmit}>
-      {profileFormConfig.map((item, index) => (
-        <div className="flex gap-3 py-6 first-of-type:pt-0" key={index}>
-          <BaseText variant="text-semibold" className="flex-1">
-            {item.label}
-          </BaseText>
-          <div className="flex flex-3 gap-3">
-            {item.fields.map((field) => (
-              <div className="flex-1" key={field.name}>
-                <BaseInput
-                  name={field.name}
-                  readOnly={!item.editable}
-                  placeholder={field.placeholder}
-                  value={
-                    item.editable
-                      ? formData[field.name as keyof typeof formData]
-                      : 'value' in field
-                        ? field.value
-                        : ''
-                  }
-                  onChange={handleInputChange}
-                />
-              </div>
-            ))}
+      <UpdateInput title="Name" className="pb-6">
+        <div className="xs:flex-row flex flex-3 flex-col gap-3">
+          <div className="flex-1">
+            <BaseInput
+              name="firstName"
+              placeholder="First Name"
+              value={formData.firstName}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="flex-1">
+            <BaseInput
+              name="lastName"
+              placeholder="Last Name"
+              value={formData.lastName}
+              onChange={handleInputChange}
+            />
           </div>
         </div>
-      ))}
+      </UpdateInput>
 
-      <div className="flex gap-3 py-6">
-        <BaseText variant="text-semibold" className="flex-1">
-          Address
-        </BaseText>
+      <UpdateInput title="Email Address" className="py-6">
+        <div className="flex flex-3 gap-3">
+          <div className="flex-1">
+            <BaseInput
+              name="email"
+              placeholder="Email"
+              readOnly
+              value={user?.email || ''}
+              className="text-neutral-500"
+            />
+          </div>
+        </div>
+      </UpdateInput>
+
+      <UpdateInput title="Phone Number" className="py-6">
+        <div className="flex flex-3 gap-3">
+          <div className="flex-1">
+            <BaseInput
+              name="phone"
+              placeholder="Add phone number"
+              value={formData.phone}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+      </UpdateInput>
+
+      <UpdateInput title="Address" className="pt-6">
         <div className="flex flex-3 flex-col gap-3">
-          <div className="flex gap-3">
+          <div className="xs:flex-row flex flex-col gap-3">
             <BaseInput
               name="country"
               placeholder="Country"
@@ -123,7 +139,7 @@ export default function ProfilePage() {
               className="flex-2"
             />
           </div>
-          <div className="flex gap-3">
+          <div className="xs:flex-row flex flex-col gap-3">
             <BaseInput
               name="state"
               placeholder="State / Province"
@@ -138,7 +154,6 @@ export default function ProfilePage() {
               onChange={handleInputChange}
               className="flex-1"
             />
-
             <BaseInput
               name="postalCode"
               placeholder="Postal Code"
@@ -148,7 +163,7 @@ export default function ProfilePage() {
             />
           </div>
         </div>
-      </div>
+      </UpdateInput>
     </form>
   );
 }
